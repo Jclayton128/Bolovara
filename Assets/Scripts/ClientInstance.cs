@@ -10,16 +10,12 @@ public class ClientInstance : NetworkBehaviour
     [SerializeField] GameObject tankPrefab = null;
     public static ClientInstance Instance;
     Camera cam;
+    public GameObject currentAvatar;
 
-    //public override void OnStartServer()
-    //{
-    //    base.OnStartServer();
-    //    NetworkSpawnAvatar();
-    //}
+    public static Action<GameObject> OnAvatarSpawned; //Anytime an observer to this event hears it, they get passed a reference Game Object
 
-    public static Action<GameObject> OnAvatarSpawned;
-
-    public void InvokeAvatarSpawned(GameObject go)
+    public void InvokeAvatarSpawned(GameObject go)  
+        //This fires or dispatches the OnAvatarSpawned event, along with the GameObject reference of the thing that just spawned
     {
         OnAvatarSpawned?.Invoke(go);
     }
@@ -34,21 +30,20 @@ public class ClientInstance : NetworkBehaviour
         {
             cam.enabled = false;
         }
-
+        CmdRequestSpawn();
     }
 
-    public override void OnStartServer()
+    [Command]
+    private void CmdRequestSpawn()
     {
-        base.OnStartServer();
         NetworkSpawnAvatar();
     }
 
+    [Server]
     private void NetworkSpawnAvatar()
     {
         GameObject go = Instantiate(tankPrefab, transform.position, Quaternion.identity);
         NetworkServer.Spawn(go, base.connectionToClient);
-        cam.enabled = true;
-        cam.GetComponentInChildren<CinemachineVirtualCamera>().Follow = go.transform;
     }
 
     public static ClientInstance ReturnClientInstance(NetworkConnection conn = null)

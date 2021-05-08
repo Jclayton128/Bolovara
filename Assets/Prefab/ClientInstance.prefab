@@ -64,3 +64,4 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   tankPrefab: {fileID: 4164942101872321102, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
+  currentAvatar: {fileID: 0}

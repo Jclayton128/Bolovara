@@ -19,4 +19,10 @@ public class BolovaraNetworkManager : NetworkManager
         NetworkServer.AddPlayerForConnection(conn, player);
     }
 
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        base.OnServerDisconnect(conn);
+        LocalPlayers.Remove(conn);
+    }
+
 }
