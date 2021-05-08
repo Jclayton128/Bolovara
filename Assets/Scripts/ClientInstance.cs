@@ -34,6 +34,12 @@ public class ClientInstance : NetworkBehaviour
         {
             cam.enabled = false;
         }
+
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
         NetworkSpawnAvatar();
     }
 
