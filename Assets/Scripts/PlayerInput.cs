@@ -6,6 +6,7 @@ using Mirror;
 public class PlayerInput : ControlSource
 {
     //init
+    Attack attack;
 
     //param
 
@@ -17,6 +18,7 @@ public class PlayerInput : ControlSource
     protected override void Start()
     {
         base.Start();
+        attack = GetComponent<Attack>();
 
     }
 
@@ -29,6 +31,7 @@ public class PlayerInput : ControlSource
         base.Update();
         HandleKeyboardInput();
         HandleMouseInput();
+        
     }
 
     private void HandleMouseInput()
@@ -36,7 +39,7 @@ public class PlayerInput : ControlSource
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             LMBdown = true;
-            //attack.AttackCommence();
+            attack.CmdRequestAttackCommence();
         }
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
