@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1459045170686098948}
   - component: {fileID: 1459045170686098955}
   - component: {fileID: 5862694335840644350}
-  - component: {fileID: 1975224891821805428}
-  - component: {fileID: -6818667016698081137}
-  m_Layer: 0
+  - component: {fileID: 589940425147871913}
+  - component: {fileID: 2970772283787772964}
+  m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,8 +124,8 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
---- !u!61 &1975224891821805428
-BoxCollider2D:
+--- !u!58 &589940425147871913
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -134,23 +134,13 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.08, y: 0.18}
-    newSize: {x: 0.08, y: 0.18}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0.06}
   serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.18}
-  m_EdgeRadius: 0
---- !u!114 &-6818667016698081137
+  m_Radius: 0.03
+--- !u!114 &2970772283787772964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,7 +149,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1459045170686098954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20253d18b57745b4eb58d79eaef4f061, type: 3}
+  m_Script: {fileID: 11500000, guid: b0eeb2ffee20e2c4dbd5dcaaf3388a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathAnimation: {fileID: 4736777088589369892, guid: dbb37f06f07bed74a84cf8b04cfb33a1, type: 3}
+  weaponImpactAnimationPrefab: {fileID: 4736777088589369892, guid: dbb37f06f07bed74a84cf8b04cfb33a1, type: 3}

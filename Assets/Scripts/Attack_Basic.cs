@@ -10,7 +10,7 @@ public class Attack_Basic : Attack
     float weaponSpeed = 5f;
     float weaponLifetime = .75f;
     float weaponDamage = 1f;
-    float offset = .5f;
+    float offset = .45f;
     float energyCost = 20f;
 
     //hood
@@ -53,6 +53,9 @@ public class Attack_Basic : Attack
             Debug.Log("execute attack on server");
             GameObject bullet = Instantiate(projectilePrefab, transform.position + (transform.up * offset), transform.rotation) as GameObject;
             bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * weaponSpeed;
+            DamageDealer dd = bullet.GetComponent<DamageDealer>();
+            dd.Simulated = true;
+            dd.SetDamage(weaponDamage);
             Destroy(bullet, weaponLifetime);
             timeSinceLastAttack = timeBetweenAttacks;
 
@@ -65,8 +68,8 @@ public class Attack_Basic : Attack
     {
         GameObject bullet = Instantiate(projectilePrefab, transform.position + (transform.up * offset), transform.rotation) as GameObject;
         bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * weaponSpeed;
-        //turn off spawned bullet's damagedealer since the client's instance is simulated and not true
-        bullet.GetComponent<Collider2D>().enabled = false;
+        DamageDealer dd = bullet.GetComponent<DamageDealer>();
+        dd.Simulated = false;
         Destroy(bullet, weaponLifetime);
     }
 

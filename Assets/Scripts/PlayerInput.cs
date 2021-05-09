@@ -65,7 +65,6 @@ public class PlayerInput : ControlSource
     {
         horizComponent = Input.GetAxis("Horizontal");
         vertComponent = Input.GetAxis("Vertical");
-
     }
 
 

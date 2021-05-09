@@ -18,7 +18,8 @@ GameObject:
   - component: {fileID: 4954483688692020758}
   - component: {fileID: 6060289373905397389}
   - component: {fileID: 2715685258244238922}
-  m_Layer: 0
+  - component: {fileID: 2208610583293660266}
+  m_Layer: 8
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,3 +237,26 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.21
+--- !u!114 &2208610583293660266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4164942101872321102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82382fe66cfc17942aad7d0971a1f0a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  deathAnimoidPrefab: {fileID: 4736777088589369892, guid: dd50caacceff75449a8e5e0fbb3b6ec0, type: 3}
+  hurtAudioClips: []
+  dieAudioClips: []
+  spritesByHealth: []
+  healthBar: {fileID: 0}
+  startingHealth: 3
+  armorLevel: 0
+  canMove: 1
+  currentHealth: 0
