@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class Health : NetworkBehaviour
@@ -15,6 +16,7 @@ public class Health : NetworkBehaviour
     [SerializeField] Sprite[] spritesByHealth = null;
     //UIManager uim;
     public Slider healthBar;
+    [SerializeField] TextMeshProUGUI healthTMP = null;
 
     SpriteRenderer sr;
     AudioClip chosenHurtSound;
@@ -38,6 +40,7 @@ public class Health : NetworkBehaviour
         //healthBar = uim.GetHealthBar(transform.root.gameObject);
         sr = transform.root.GetComponentInChildren<SpriteRenderer>();
         currentHealth = startingHealth;
+        healthTMP.text = currentHealth.ToString();
         //UpdateHealthBar();
         if (canMove)
         {
@@ -130,6 +133,7 @@ public class Health : NetworkBehaviour
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, -1, startingHealth);
         //UpdateHealthBar();
+        healthTMP.text = currentHealth.ToString();
         AdjustSpriteToHealthLevel();
     }
 
