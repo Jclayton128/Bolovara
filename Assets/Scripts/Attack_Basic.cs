@@ -54,7 +54,7 @@ public class Attack_Basic : Attack
             GameObject bullet = Instantiate(projectilePrefab, transform.position + (transform.up * offset), transform.rotation) as GameObject;
             bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * weaponSpeed;
             DamageDealer dd = bullet.GetComponent<DamageDealer>();
-            dd.Simulated = true;
+            dd.Simulated = false;
             dd.SetDamage(weaponDamage);
             Destroy(bullet, weaponLifetime);
             timeSinceLastAttack = timeBetweenAttacks;
@@ -69,7 +69,7 @@ public class Attack_Basic : Attack
         GameObject bullet = Instantiate(projectilePrefab, transform.position + (transform.up * offset), transform.rotation) as GameObject;
         bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * weaponSpeed;
         DamageDealer dd = bullet.GetComponent<DamageDealer>();
-        dd.Simulated = false;
+        dd.Simulated = true;
         Destroy(bullet, weaponLifetime);
     }
 

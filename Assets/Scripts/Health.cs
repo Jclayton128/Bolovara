@@ -100,7 +100,7 @@ public class Health : NetworkBehaviour
     {
         DamageDealer dd = other.GetComponent<DamageDealer>();
         if (!dd) { return; }
-        if (dd.Simulated == false) { return; }
+        if (dd.Simulated == true) { return; }
         if (dd.GetAttackSource())
         {
             ownerOfLastDamageDealerToBeHitBy = dd.GetAttackSource();
