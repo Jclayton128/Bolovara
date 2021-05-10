@@ -19,15 +19,16 @@ public abstract class ControlSource : NetworkBehaviour
     protected int layerMask_weaponryBlockers = 1 << 8;
 
     //hood
-    public float horizComponent { get; protected set; }
-    public float vertComponent { get; protected set; }
-    public int speedSetting { get; protected set; } = 1;
+    public float HorizComponent { get; protected set; }
+    public float VertComponent { get; protected set; }
+    public int SpeedSetting { get; protected set; } = 1;
+    public Vector3 AimDir { get; protected set; }
 
     protected float timeSinceLastScan = 0;
     //public int currentTerrainType { get; protected set; } = 3;
     public int currentTerrainType;
     protected bool isFollowMeOn = true;
-    public Vector3 facingTargetPoint;
+    //public Vector3 facingTargetPoint;
 
     protected virtual void Start()
     {

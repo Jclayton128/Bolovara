@@ -13,7 +13,7 @@ public class PlayerInput : ControlSource
     //hood
     public bool LMBdown = false;
     public bool RMBdown = false;
-    public Vector3 mousePos = new Vector3(0, 0, 0);
+    Vector3 mousePos = new Vector3(0, 0, 0);
 
     protected override void Start()
     {
@@ -26,12 +26,12 @@ public class PlayerInput : ControlSource
     // Update is called once per frame
     protected override void Update()
     {
-        if (!hasAuthority)
-            return;
-        base.Update();
-        HandleKeyboardInput();
-        HandleMouseInput();
-        
+        if (hasAuthority)
+        {
+            base.Update();
+            HandleKeyboardInput();
+            HandleMouseInput();
+        }       
     }
 
     private void HandleMouseInput()
@@ -59,12 +59,13 @@ public class PlayerInput : ControlSource
 
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
+        AimDir = (mousePos - transform.position).normalized;
     }
 
     private void HandleKeyboardInput()
     {
-        horizComponent = Input.GetAxis("Horizontal");
-        vertComponent = Input.GetAxis("Vertical");
+        HorizComponent = Input.GetAxis("Horizontal");
+        VertComponent = Input.GetAxis("Vertical");
     }
 
 

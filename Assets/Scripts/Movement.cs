@@ -37,11 +37,11 @@ public class Movement : MonoBehaviour
     }
     protected virtual void CheckForCommandedMovement()
     {
-        if (Mathf.Abs(cs.horizComponent) > Mathf.Epsilon || Mathf.Abs(cs.vertComponent) > Mathf.Epsilon) //if move commands are non-zero;
+        if (Mathf.Abs(cs.HorizComponent) > Mathf.Epsilon || Mathf.Abs(cs.VertComponent) > Mathf.Epsilon) //if move commands are non-zero;
         {
             isCommandedToMove = true;
         }
-        if (Mathf.Abs(cs.horizComponent) == 0f && Mathf.Abs(cs.vertComponent) == 0f) //if move commands are non-zero;
+        if (Mathf.Abs(cs.HorizComponent) == 0f && Mathf.Abs(cs.VertComponent) == 0f) //if move commands are non-zero;
         {
             isCommandedToMove = false;
         }
@@ -50,12 +50,12 @@ public class Movement : MonoBehaviour
     protected virtual void UpdateCurrentMoveSpeed()
     {
         //TODO: Get and use terrain speed modifier
-        float gearModifier = (cs.speedSetting) / 2f;
-        if (cs.speedSetting >= 0)
+        float gearModifier = (cs.SpeedSetting) / 2f;
+        if (cs.SpeedSetting >= 0)
         {
             moveSpeed_current = moveSpeed_normal * gearModifier;
         }
-        if (cs.speedSetting < 0)
+        if (cs.SpeedSetting < 0)
         {
             moveSpeed_current = 0;
         }

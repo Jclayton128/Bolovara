@@ -97,8 +97,8 @@ public class Movement_Tank : Movement
 
     private void UpdateCommandedVectorAndAngleOffIt()
     {
-        commandedVector.x = cs.horizComponent;
-        commandedVector.y = cs.vertComponent;
+        commandedVector.x = cs.HorizComponent;
+        commandedVector.y = cs.VertComponent;
         if (commandedVector.magnitude > 1)
         {
             commandedVector.Normalize();

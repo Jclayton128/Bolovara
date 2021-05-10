@@ -41,6 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: GroundUnit
+    uniqueID: 3023804657
+    locked: 0
+  - name: GroundWeaponry
+    uniqueID: 1904172051
+    locked: 0
   - name: UI
     uniqueID: 3107314243
     locked: 0

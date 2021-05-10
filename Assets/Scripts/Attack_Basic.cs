@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Attack_Basic : Attack
 {
+    //init
+    Transform weaponSource;
+
     //param
     float timeBetweenAttacks = 0.3f;
     float weaponSpeed = 5f;
@@ -19,6 +22,8 @@ public class Attack_Basic : Attack
     protected override void Start()
     {
         base.Start();
+        weaponSource = GetComponentInChildren<WeaponSource>().transform;
+
     }
 
     [Command]
@@ -51,7 +56,7 @@ public class Attack_Basic : Attack
         if (timeSinceLastAttack < 0)
         {
             Debug.Log("execute attack on server");
-            GameObject bullet = Instantiate(projectilePrefab, transform.position + (transform.up * offset), transform.rotation) as GameObject;
+            GameObject bullet = Instantiate(projectilePrefab, weaponSource.position + (weaponSource.up * offset), weaponSource.rotation) as GameObject;
             bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * weaponSpeed;
             DamageDealer dd = bullet.GetComponent<DamageDealer>();
             dd.Simulated = false;
@@ -66,7 +71,7 @@ public class Attack_Basic : Attack
     [ClientRpc]
     private void RpcDisplaySimAttackOnClients()
     {
-        GameObject bullet = Instantiate(projectilePrefab, transform.position + (transform.up * offset), transform.rotation) as GameObject;
+        GameObject bullet = Instantiate(projectilePrefab, weaponSource.position + (weaponSource.up * offset), weaponSource.rotation) as GameObject;
         bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * weaponSpeed;
         DamageDealer dd = bullet.GetComponent<DamageDealer>();
         dd.Simulated = true;
