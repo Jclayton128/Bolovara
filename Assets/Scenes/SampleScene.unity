@@ -3350,6 +3350,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2063790580221910251, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
+      propertyPath: rotationSpeed
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 4164942101872321102, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
       propertyPath: m_Name
       value: Tank (1)
@@ -3405,6 +3409,14 @@ PrefabInstance:
     - target: {fileID: 4164942101872321107, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127802627311162776, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
+      propertyPath: syncScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127802627311162776, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
+      propertyPath: syncInterval
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}

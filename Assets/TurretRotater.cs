@@ -10,7 +10,7 @@ public class TurretRotater : MonoBehaviour
     ControlSource cs;
 
     //param
-    public float rotationSpeed = 360;
+    public float rotationSpeed;
 
 
     //hood
@@ -30,22 +30,24 @@ public class TurretRotater : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         RotateTurretToMouseDir();
     }
 
     private void RotateTurretToMouseDir()
     {
+        float factor = Mathf.Clamp(angToAimDir/10, -1, 1);
         if (Mathf.Abs(angToAimDir) <= .1f)
         {
             return;
         }
         if (angToAimDir > 0.1)
         {
-            turret.transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+            turret.transform.Rotate(Vector3.forward, rotationSpeed * factor * Time.deltaTime);
         }
         if (angToAimDir < -.1)
         {
-            turret.transform.Rotate(Vector3.forward, -1 * rotationSpeed * Time.deltaTime);
+            turret.transform.Rotate(Vector3.forward, rotationSpeed * factor * Time.deltaTime);
         }
     }
 
