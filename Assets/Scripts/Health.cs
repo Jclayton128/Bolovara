@@ -30,7 +30,10 @@ public class Health : NetworkBehaviour
 
     //hood
     bool isDying = false;
+
+    [SyncVar(hook = nameof(UpdateHealthText))]
     public float currentHealth;
+
     GameObject ownerOfLastDamageDealerToBeHitBy;
 
 
@@ -40,7 +43,7 @@ public class Health : NetworkBehaviour
         //healthBar = uim.GetHealthBar(transform.root.gameObject);
         sr = transform.root.GetComponentInChildren<SpriteRenderer>();
         currentHealth = startingHealth;
-        healthTMP.text = currentHealth.ToString();
+        UpdateHealthText(0, currentHealth);
         //UpdateHealthBar();
         if (canMove)
         {
@@ -59,6 +62,12 @@ public class Health : NetworkBehaviour
         healthBar.maxValue = startingHealth;
         healthBar.minValue = 0;
         healthBar.value = currentHealth;
+    }
+
+    private void UpdateHealthText(float oldValue, float newValue)
+    {
+        healthTMP.text = newValue.ToString();
+
     }
 
     private void SelectDieSound()
@@ -133,7 +142,7 @@ public class Health : NetworkBehaviour
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, -1, startingHealth);
         //UpdateHealthBar();
-        healthTMP.text = currentHealth.ToString();
+        UpdateHealthText(0,currentHealth);
         AdjustSpriteToHealthLevel();
     }
 
