@@ -14,7 +14,8 @@ public class Health : NetworkBehaviour
     [SerializeField] AudioClip[] hurtAudioClips = null;
     [SerializeField] AudioClip[] dieAudioClips = null;
     [SerializeField] Sprite[] spritesByHealth = null;
-    //UIManager uim;
+    ClientInstance playerAtThisComputer;
+    UIManager uim;
     public Slider healthBar;
     [SerializeField] TextMeshProUGUI healthTMP = null;
 
@@ -31,7 +32,7 @@ public class Health : NetworkBehaviour
     //hood
     bool isDying = false;
 
-    [SyncVar(hook = nameof(UpdateHealthText))]
+    [SyncVar(hook = nameof(UpdateHealthBar))]
     public float currentHealth;
 
     GameObject ownerOfLastDamageDealerToBeHitBy;
@@ -39,24 +40,28 @@ public class Health : NetworkBehaviour
 
     void Start()
     {
-        // = FindObjectOfType<UIManager>();
-        //healthBar = uim.GetHealthBar(transform.root.gameObject);
+        if (hasAuthority)
+        {
+            playerAtThisComputer = ClientInstance.ReturnClientInstance();
+            uim = FindObjectOfType<UIManager>();
+            healthBar = uim.GetHealthBar(playerAtThisComputer);
+        }
         sr = transform.root.GetComponentInChildren<SpriteRenderer>();
         currentHealth = startingHealth;
-        UpdateHealthText(0, currentHealth);
-        //UpdateHealthBar();
+        UpdateHealthBar(0,0);
         if (canMove)
         {
             rb = transform.root.GetComponentInChildren<Rigidbody2D>();
         }
         SelectDieSound();
+
     }
 
     public void Reinitialize()
     {
         Start();
     }
-    private void UpdateHealthBar()
+    private void UpdateHealthBar(float oldValue, float newValue)
     {
         if (!healthBar) { return; }
         healthBar.maxValue = startingHealth;
@@ -64,11 +69,6 @@ public class Health : NetworkBehaviour
         healthBar.value = currentHealth;
     }
 
-    private void UpdateHealthText(float oldValue, float newValue)
-    {
-        healthTMP.text = newValue.ToString();
-
-    }
 
     private void SelectDieSound()
     {
@@ -141,8 +141,7 @@ public class Health : NetworkBehaviour
 
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, -1, startingHealth);
-        //UpdateHealthBar();
-        UpdateHealthText(0,currentHealth);
+        UpdateHealthBar(0,0);
         AdjustSpriteToHealthLevel();
     }
 

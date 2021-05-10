@@ -31,6 +31,7 @@ public class ClientInstance : NetworkBehaviour
             cam.enabled = false;
         }
         CmdRequestSpawn();
+        FindObjectOfType<UIManager>().SetLocalPlayerForUI(this);
     }
 
     [Command]
