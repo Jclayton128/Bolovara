@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 
 public class Health : NetworkBehaviour
@@ -16,8 +15,7 @@ public class Health : NetworkBehaviour
     [SerializeField] Sprite[] spritesByHealth = null;
     ClientInstance playerAtThisComputer;
     UIManager uim;
-    public Slider healthBar;
-    [SerializeField] TextMeshProUGUI healthTMP = null;
+    Slider healthBar;
 
     SpriteRenderer sr;
     AudioClip chosenHurtSound;

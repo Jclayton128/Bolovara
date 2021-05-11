@@ -3350,6 +3350,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3161848990018943978, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2063790580221910251, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
       propertyPath: rotationSpeed
       value: 180
@@ -3357,6 +3361,10 @@ PrefabInstance:
     - target: {fileID: 4164942101872321102, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
       propertyPath: m_Name
       value: Tank (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4164942101872321102, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4164942101872321105, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
       propertyPath: sceneId
@@ -20674,10 +20682,10 @@ MonoBehaviour:
   syncInterval: 0.1
   playerAtThisComputer: {fileID: 0}
   healthBar: {fileID: 2007628585}
-  shiftKnob: {fileID: 0}
-  shiftPos_1: {fileID: 0}
-  shiftPos_2: {fileID: 0}
-  shiftPos_3: {fileID: 0}
+  shiftKnob: {fileID: 1246437697}
+  shiftPos_1: {fileID: 459615739}
+  shiftPos_2: {fileID: 1717241166}
+  shiftPos_3: {fileID: 1548936477}
   houseCounter: {fileID: 0}
   moneyCounter: {fileID: 0}
   flag: {fileID: 0}

@@ -168,6 +168,12 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   currentTerrainType: 0
+  uim: {fileID: 0}
+  shiftKnob: {fileID: 0}
+  gearShiftPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   LMBdown: 0
   RMBdown: 0
 --- !u!114 &-81027991435423304
@@ -256,8 +262,6 @@ MonoBehaviour:
   hurtAudioClips: []
   dieAudioClips: []
   spritesByHealth: []
-  healthBar: {fileID: 0}
-  healthTMP: {fileID: 0}
   startingHealth: 3
   armorLevel: 0
   canMove: 1
@@ -298,6 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turret: {fileID: 6577860182831269234}
   rotationSpeed: 360
+  angToAimDir: 0
 --- !u!1 &8033423632718691546
 GameObject:
   m_ObjectHideFlags: 0

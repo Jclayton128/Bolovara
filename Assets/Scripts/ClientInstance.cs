@@ -42,7 +42,6 @@ public class ClientInstance : NetworkBehaviour
 
     public void SetupAvatarRespawn()
     {
-        Debug.Log("Oh did you want to respawn?");
         if (isLocalPlayer)
         {
             Destroy(currentAvatar);

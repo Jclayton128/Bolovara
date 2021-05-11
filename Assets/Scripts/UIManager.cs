@@ -37,6 +37,11 @@ public class UIManager : NetworkBehaviour
         playerAtThisComputer = ci;
     }
 
+    public ClientInstance GetLocalPlayerForChecking()
+    {
+        return playerAtThisComputer;
+    }
+
     public Slider GetHealthBar(ClientInstance askingCI)
     {
         if (askingCI == playerAtThisComputer)
@@ -57,7 +62,7 @@ public class UIManager : NetworkBehaviour
         }
         else
         {
-            //Debug.Log("Asking GO is not the local player! No UI for you!");
+            Debug.Log("Asking GO is not the local player! No UI for you!");
             return null;
         }
     }
@@ -71,7 +76,7 @@ public class UIManager : NetworkBehaviour
         }
         else
         {
-            //Debug.Log("Asking GO is not the local player! No UI for you!");
+            Debug.Log("Asking GO is not the local player! No UI for you!");
             shift1 = null;
             shift2 = null;
             shift3 = null;

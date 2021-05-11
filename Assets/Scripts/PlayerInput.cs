@@ -2,11 +2,16 @@
 using TMPro;
 using System;
 using Mirror;
+using UnityEngine.UI;
 
 public class PlayerInput : ControlSource
 {
     //init
     Attack attack;
+    UIManager uim;
+    GameObject shiftKnob;
+    [SerializeField] Transform[] gearShiftPositions = null;
+    TextMeshProUGUI followMeText;
 
     //param
 
@@ -14,15 +19,28 @@ public class PlayerInput : ControlSource
     public bool LMBdown = false;
     public bool RMBdown = false;
     Vector3 mousePos = new Vector3(0, 0, 0);
+    ClientInstance playerAtThisComputer;
 
     protected override void Start()
     {
         base.Start();
         attack = GetComponent<Attack>();
+        HookIntoLocalUI();
 
     }
 
- 
+    private void HookIntoLocalUI()
+    {
+        if (hasAuthority)
+        {
+            playerAtThisComputer = ClientInstance.ReturnClientInstance();
+            uim = FindObjectOfType<UIManager>();
+            shiftKnob = uim.GetShiftKnob(playerAtThisComputer);
+            uim.GetShiftPositions(playerAtThisComputer, out gearShiftPositions[0], out gearShiftPositions[1], out gearShiftPositions[2]);
+        }
+    }
+
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -66,6 +84,22 @@ public class PlayerInput : ControlSource
     {
         HorizComponent = Input.GetAxis("Horizontal");
         VertComponent = Input.GetAxis("Vertical");
+        HandleGearShifting();
+    }
+    private void HandleGearShifting()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            SpeedSetting++;
+            //TODO: Play an audioclip with gear shifting 'clunk'
+            if (SpeedSetting > gearShiftPositions.Length)
+            {
+                SpeedSetting = 1;
+            }
+        }
+
+        if (!shiftKnob) { return; }
+        shiftKnob.transform.position = gearShiftPositions[SpeedSetting - 1].transform.position;
     }
 
 

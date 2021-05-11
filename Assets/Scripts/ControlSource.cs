@@ -21,7 +21,7 @@ public abstract class ControlSource : NetworkBehaviour
     //hood
     public float HorizComponent { get; protected set; }
     public float VertComponent { get; protected set; }
-    public int SpeedSetting { get; protected set; } = 1;
+    public int SpeedSetting { get; protected set; } = 1;  //Should be either 1, 2, or 3
     public Vector3 AimDir { get; protected set; }
 
     protected float timeSinceLastScan = 0;
