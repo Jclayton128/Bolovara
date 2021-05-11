@@ -47,7 +47,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    protected virtual void UpdateCurrentMoveSpeed()
+    protected virtual void UpdateCurrentMoveSpeedWithSpeedSetting()
     {
         //TODO: Get and use terrain speed modifier
         float gearModifier = (cs.SpeedSetting) / 2f;

@@ -10,10 +10,11 @@ public class Movement_Tank : Movement
     //init
 
     //param
-    public float terrainMod_field = 1;
-    public float terrainMod_road = 1.25f;
-    public float terrainMod_hills = 0.5f;
-    public float terrainMod_forest = 0.5f;
+    public float terrainMod_field;
+    public float terrainMod_road;
+    public float terrainMod_hills;
+    public float terrainMod_forest;
+    public float terrainMod_water;
 
     //hood
     public Vector3 commandedVector = new Vector3();
@@ -32,7 +33,7 @@ public class Movement_Tank : Movement
     {
         base.Update();
         Debug.DrawLine(transform.position, commandedVector.normalized + transform.position, Color.blue);
-        UpdateCurrentMoveSpeed();
+        UpdateCurrentMoveSpeedWithSpeedSetting();
         UpdateCurrentMoveSpeedWithTerrainModifier();
         UpdateCommandedVectorAndAngleOffIt();
     }
@@ -53,9 +54,15 @@ public class Movement_Tank : Movement
             return;
 
         }
-        if (terrainMod == 6)
+        if (terrain == 6)
         {
             terrainMod = terrainMod_forest;
+            moveSpeed_Current_Terrain = moveSpeed_current * terrainMod;
+            return;
+        }
+        if (terrain == 7)
+        { 
+            terrainMod = terrainMod_water;
             moveSpeed_Current_Terrain = moveSpeed_current * terrainMod;
             return;
         }
