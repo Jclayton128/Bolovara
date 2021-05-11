@@ -21,7 +21,6 @@ public class ClientInstance : NetworkBehaviour
     {
         OnAvatarSpawned?.Invoke(go);
         currentAvatar = go;
-        go.GetComponent<Health>().OnAvatarDestroyed += SetupAvatarRespawn;
     }
 
 
@@ -41,20 +40,13 @@ public class ClientInstance : NetworkBehaviour
         FindObjectOfType<UIManager>().SetLocalPlayerForUI(this);
     }
 
-    [Client]
-
-    private void Update()
+    public void SetupAvatarRespawn()
     {
-        if (!currentAvatar)
+        if (isLocalPlayer && !currentAvatar)
         {
+            Debug.Log("Oh did you want to respawn?");
             CmdRequestSpawn();
         }
-    }
-
-    private void SetupAvatarRespawn()
-    {
-        Debug.Log("Oh did you want to respawn?");
-        //CmdRequestSpawn();
     }
 
     [Command]
