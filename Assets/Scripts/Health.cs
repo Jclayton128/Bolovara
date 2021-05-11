@@ -104,9 +104,15 @@ public class Health : NetworkBehaviour
         Animator anim = deathAnimoid.GetComponent<Animator>();
         Destroy(deathAnimoid, anim.GetCurrentAnimatorStateInfo(0).length);
         Destroy(transform.root.gameObject);
-        ClientInstance.ReturnClientInstance().SetupAvatarRespawn();
 
+    }
 
+    void OnDestroy()
+    {
+        if (hasAuthority)
+        {
+            ClientInstance.ReturnClientInstance().SetupAvatarRespawn();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
