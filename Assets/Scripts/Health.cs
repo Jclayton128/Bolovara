@@ -37,6 +37,8 @@ public class Health : NetworkBehaviour
 
     GameObject ownerOfLastDamageDealerToBeHitBy;
 
+    public Action OnAvatarDestroyed; // Anytime an observer to this action hears it, they do whatever command they've registered here. 
+
 
     void Start()
     {
@@ -54,8 +56,8 @@ public class Health : NetworkBehaviour
             rb = transform.root.GetComponentInChildren<Rigidbody2D>();
         }
         SelectDieSound();
-
     }
+
 
     public void Reinitialize()
     {
@@ -87,19 +89,25 @@ public class Health : NetworkBehaviour
     {
         if (currentHealth <= 0)
         {
-            isDying = true;
-            if (chosenDieSound)
-            {
-
-                AudioSource.PlayClipAtPoint(chosenDieSound, transform.position);
-            }
-            BroadcastMessage("DyingActions", SendMessageOptions.DontRequireReceiver);
-            GameObject deathAnimoid = Instantiate(deathAnimoidPrefab, transform.position, transform.rotation) as GameObject;
-            Animator anim = deathAnimoid.GetComponent<Animator>();
-            Destroy(deathAnimoid, anim.GetCurrentAnimatorStateInfo(0).length);
-            Destroy(transform.root.gameObject);
-
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        isDying = true;
+        if (chosenDieSound)
+        {
+
+            AudioSource.PlayClipAtPoint(chosenDieSound, transform.position);
+        }
+        BroadcastMessage("DyingActions", SendMessageOptions.DontRequireReceiver);
+        GameObject deathAnimoid = Instantiate(deathAnimoidPrefab, transform.position, transform.rotation) as GameObject;
+        Animator anim = deathAnimoid.GetComponent<Animator>();
+        Destroy(deathAnimoid, anim.GetCurrentAnimatorStateInfo(0).length);
+        OnAvatarDestroyed?.Invoke();
+        Destroy(transform.root.gameObject);
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)

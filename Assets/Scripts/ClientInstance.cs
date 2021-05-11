@@ -14,13 +14,20 @@ public class ClientInstance : NetworkBehaviour
 
     public static Action<GameObject> OnAvatarSpawned; //Anytime an observer to this event hears it, they get passed a reference Game Object
 
+    #region EventResponse
+
     public void InvokeAvatarSpawned(GameObject go)  
         //This fires or dispatches the OnAvatarSpawned event, along with the GameObject reference of the thing that just spawned
     {
         OnAvatarSpawned?.Invoke(go);
+        currentAvatar = go;
+        go.GetComponent<Health>().OnAvatarDestroyed += SetupAvatarRespawn;
     }
 
 
+    #endregion
+
+    #region Client
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
@@ -34,11 +41,30 @@ public class ClientInstance : NetworkBehaviour
         FindObjectOfType<UIManager>().SetLocalPlayerForUI(this);
     }
 
+    [Client]
+
+    private void Update()
+    {
+        if (!currentAvatar)
+        {
+            CmdRequestSpawn();
+        }
+    }
+
+    private void SetupAvatarRespawn()
+    {
+        Debug.Log("Oh did you want to respawn?");
+        //CmdRequestSpawn();
+    }
+
     [Command]
-    private void CmdRequestSpawn()
+    public void CmdRequestSpawn()
     {
         NetworkSpawnAvatar();
     }
+    #endregion
+
+    #region Server
 
     [Server]
     private void NetworkSpawnAvatar()
@@ -46,6 +72,8 @@ public class ClientInstance : NetworkBehaviour
         GameObject go = Instantiate(tankPrefab, transform.position, Quaternion.identity);
         NetworkServer.Spawn(go, base.connectionToClient);
     }
+
+    #endregion
 
     public static ClientInstance ReturnClientInstance(NetworkConnection conn = null)
     {
@@ -62,5 +90,7 @@ public class ClientInstance : NetworkBehaviour
             return Instance;
         }
     }
+
+
 }
 
