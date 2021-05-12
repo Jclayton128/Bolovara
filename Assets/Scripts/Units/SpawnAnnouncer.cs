@@ -21,7 +21,7 @@ public class SpawnAnnouncer : NetworkBehaviour
     private void AnnounceSpawned()
     {
         ClientInstance ci = ClientInstance.ReturnClientInstance();
-        //ci.InvokeAvatarSpawned(gameObject);
+        ci.InvokeAvatarSpawned(gameObject);
     }
 
     private void OnDestroy()
