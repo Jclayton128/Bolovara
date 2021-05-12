@@ -5,7 +5,7 @@ using UnityEngine;
 public class UnitTracker : MonoBehaviour
 {
     //init
-    public List<GameObject> targetableUnits = new List<GameObject>();
+    [SerializeField] List<GameObject> targetableUnits = new List<GameObject>();
     AllegianceManager am;
     private void Awake()
     {
@@ -26,14 +26,15 @@ public class UnitTracker : MonoBehaviour
 
     public void AddUnitToTargetableList(GameObject unit)
     {
-        if (unit.GetComponentInChildren<IFF>())
-        {
-            targetableUnits.Add(unit);
-        }
-        else
-        {
-            Debug.Log("Can't add a targetable unit if it doesn't have an IFF");
-        }
+        targetableUnits.Add(unit);
+        //if (unit.GetComponentInChildren<IFF>())
+        //{
+        //    targetableUnits.Add(unit);
+        //}
+        //else
+        //{
+        //    Debug.Log("Can't add a targetable unit if it doesn't have an IFF");
+        //}
 
     }
 

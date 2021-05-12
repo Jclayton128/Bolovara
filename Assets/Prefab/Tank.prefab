@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 2208610583293660266}
   - component: {fileID: 9127802627311162776}
   - component: {fileID: 2063790580221910251}
+  - component: {fileID: -4120293405561646783}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Untagged
@@ -304,6 +305,25 @@ MonoBehaviour:
   turret: {fileID: 6577860182831269234}
   rotationSpeed: 360
   angToAimDir: 0
+--- !u!114 &-4120293405561646783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4164942101872321102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab4eaae902b1004e8d78460edf3ed02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  targets: []
+  timeBetweenScans: 0.3
+  radarAccuracy: 15
+  radarRange: 30
+  signalFudge: 0.05
 --- !u!1 &8033423632718691546
 GameObject:
   m_ObjectHideFlags: 0

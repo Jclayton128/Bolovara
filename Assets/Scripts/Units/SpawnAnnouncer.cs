@@ -5,6 +5,12 @@ using Mirror;
 
 public class SpawnAnnouncer : NetworkBehaviour
 {
+    
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        FindObjectOfType<UnitTracker>().AddUnitToTargetableList(gameObject);
+    }
 
     public override void OnStartAuthority()
     {
@@ -15,6 +21,11 @@ public class SpawnAnnouncer : NetworkBehaviour
     private void AnnounceSpawned()
     {
         ClientInstance ci = ClientInstance.ReturnClientInstance();
-        ci.InvokeAvatarSpawned(gameObject);
+        //ci.InvokeAvatarSpawned(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        FindObjectOfType<UnitTracker>().RemoveUnitFromTargetableList(gameObject);
     }
 }

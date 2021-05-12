@@ -15,7 +15,7 @@ public class Health : NetworkBehaviour
     [SerializeField] Sprite[] spritesByHealth = null;
     ClientInstance playerAtThisComputer;
     UIManager uim;
-    Slider healthBar;
+    [SerializeField] Slider healthBar;
 
     SpriteRenderer sr;
     AudioClip chosenHurtSound;

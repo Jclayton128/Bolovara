@@ -6040,13 +6040,8 @@ MonoBehaviour:
   - {fileID: 1005455758}
   - {fileID: 1606701272}
   - {fileID: 421426584}
-  targets: []
-  timeBetweenScans: 0.3
-  radarRange: 30
   fadePerSecond: 1
   risePerSecond: 3
-  signalFudge: 0.05
-  radarAccuracy: 30
 --- !u!1 &622502285
 GameObject:
   m_ObjectHideFlags: 3
@@ -22575,6 +22570,7 @@ MonoBehaviour:
   energyBar: {fileID: 0}
   weaponIcon: {fileID: 0}
   cityCaptureSlider: {fileID: 0}
+  radarScreen: {fileID: 619505272}
   followMeText: {fileID: 0}
 --- !u!1 &989318382
 GameObject:
@@ -27086,6 +27082,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 167
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1345437008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1345437010}
+  - component: {fileID: 1345437009}
+  - component: {fileID: 1345437011}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1345437009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345437008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88f5a796ce32de408079711cede881d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfUnits: 0
+--- !u!4 &1345437010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345437008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 946.0485, y: 312.5924, z: -24.5315}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 390
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1345437011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345437008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 1430315490
+  serverOnly: 1
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &1345625207
 GameObject:
   m_ObjectHideFlags: 3
