@@ -143,5 +143,10 @@ public abstract class ControlSource : NetworkBehaviour
         }
         return -1;
     }
+
+    public bool CheckIfAvatarOfLocalPlayer()
+    {
+        return hasAuthority;
+    }
 }
 

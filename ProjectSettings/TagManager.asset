@@ -13,13 +13,13 @@ TagManager:
   - UI
   - 
   - 
-  - GroundEntity
+  - GroundUnit
   - GroundWeaponry
+  - GroundMovementObstacle
+  - AirWeaponry
   - 
-  - 
-  - 
-  - 
-  - 
+  - StealthHider
+  - StealthSeeker
   - 
   - 
   - 
