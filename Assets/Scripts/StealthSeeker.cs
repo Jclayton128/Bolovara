@@ -1,11 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[RequireComponent(typeof(CircleCollider2D))]
 
 public class StealthSeeker : MonoBehaviour
 {
     //init
     ControlSource cs;
+    CircleCollider2D collider;
+
+    //param
+    public float SeekerRange;
+    public float SeekerChangeRate; 
 
     //hood
     public bool isAvatarOfLocalPlayer = false;
@@ -14,12 +21,28 @@ public class StealthSeeker : MonoBehaviour
     {
         cs = GetComponentInParent<ControlSource>();
         isAvatarOfLocalPlayer = cs.CheckIfAvatarOfLocalPlayer();
+        collider = GetComponent<CircleCollider2D>();
+        collider.radius = 0.001f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        GrowShrinkSeekerRange();
+    }
 
+    private void GrowShrinkSeekerRange()
+    {
+        if (collider.radius < SeekerRange)
+        {
+            //grow collider
+            collider.radius += SeekerChangeRate * Time.deltaTime;
+        }
+        if (collider.radius > SeekerRange)
+        {
+            //shrink collider
+            collider.radius -= SeekerChangeRate * Time.deltaTime;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

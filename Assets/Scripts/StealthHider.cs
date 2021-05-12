@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(CircleCollider2D))]
 
 public class StealthHider : MonoBehaviour
 
@@ -22,7 +22,7 @@ public class StealthHider : MonoBehaviour
     public float hiderRadius_Base;
     public float hiderGrowthRate; //per second;
     public float hiderShrinkRate; //per second;
-    public float attackModifier = 3f; //attacking multiplies the size of hiderRadius_Base, 
+    public float attackModifier; //attacking multiplies the size of hiderRadius_Base, 
     public bool isBuilding = false;
     float fadeRateSensorGhost = .2f; // 5 seconds at .2f
     float playerUnitFadeAmount = 0.5f;

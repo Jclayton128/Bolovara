@@ -46,13 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: c82d219d462822642ae9a4842221bdbe, type: 2}
   sensorGhostPrefab: {fileID: 8909522313552497857, guid: 67ca68796374bcb45b023548396f41cf, type: 3}
-  hiderRadius_Base: 0
-  hiderGrowthRate: 0
-  hiderShrinkRate: 0
+  hiderRadius_Base: 1
+  hiderGrowthRate: 1
+  hiderShrinkRate: 1
   attackModifier: 3
   isBuilding: 0
   hiderRadius_Modified: 0
   hiderRadius_TerrainModifier: 1
+  isAvatarOfLocalPlayer: 0
 --- !u!58 &544919843613036706
 CircleCollider2D:
   m_ObjectHideFlags: 0

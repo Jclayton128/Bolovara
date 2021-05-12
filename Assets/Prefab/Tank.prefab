@@ -152,7 +152,7 @@ MonoBehaviour:
   terrainMod_road: 1.25
   terrainMod_hills: 0.5
   terrainMod_forest: 0.5
-  terrainMod_water: 0
+  terrainMod_water: 0.2
   commandedVector: {x: 0, y: 0, z: 0}
   terrainMod: 0
   moveSpeed_Current_Terrain: 0

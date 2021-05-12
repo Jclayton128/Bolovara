@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552febae2ea650e459a5902ed3d44727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SeekerRange: 3
+  SeekerChangeRate: 1
+  isAvatarOfLocalPlayer: 0
 --- !u!58 &4370448835849966194
 CircleCollider2D:
   m_ObjectHideFlags: 0
