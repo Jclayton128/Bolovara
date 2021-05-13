@@ -24,14 +24,13 @@ public class StealthHider : MonoBehaviour
     public float hiderShrinkRate; //per second;
     public float attackModifier; //attacking multiplies the size of hiderRadius_Base, 
     public bool isBuilding = false;
-    float fadeRateSensorGhost = .2f; // 5 seconds at .2f
+
     float playerUnitFadeAmount = 0.5f;
 
 
     //hood
     public float hiderRadius_Modified;
     public float hiderRadius_TerrainModifier = 1;
-    GameObject sensorGhost;
     bool isAvatarOfLocalPlayer = false;
 
 
@@ -56,23 +55,9 @@ public class StealthHider : MonoBehaviour
     void Update()
     {
         UpdateHiderRadiusInputBasedOnSpeedAndTerrain();
-        if (!isBuilding)
-        {
-            FadeOutSensorGhost();
-        }
     }
 
-    private void FadeOutSensorGhost()
-    {
-        if (!sensorGhost) { return; }
-        SpriteRenderer sr = sensorGhost.GetComponent<SpriteRenderer>();
-        float a = Mathf.MoveTowards(sr.color.a, 0, fadeRateSensorGhost * Time.deltaTime);
-        sr.color = new Color(1, 1, 1, a);
-        if (a <= Mathf.Epsilon)
-        {
-            Destroy(sensorGhost);
-        }
-    }
+
 
     private void UpdateHiderRadiusInputBasedOnSpeedAndTerrain()
     {
@@ -165,6 +150,7 @@ public class StealthHider : MonoBehaviour
         else
         {
             MakeObjectInvisible();
+            //Or turn turrets back into houses?
         }
     }
 
@@ -184,7 +170,7 @@ public class StealthHider : MonoBehaviour
         if (isBuilding) { return; }
         if (transform.root.tag != "Player")
         {
-            sensorGhost = CreateSensorGhost();
+            CreateSensorGhost();
             foreach (SpriteRenderer thisSR in srs)
             {
                 thisSR.enabled = false;
@@ -192,29 +178,19 @@ public class StealthHider : MonoBehaviour
         }
     }
 
-    private GameObject CreateSensorGhost()
+    private void CreateSensorGhost()
     {
-        if (sensorGhost != null)
-        {
-            Destroy(sensorGhost);
-        }
         float z = transform.root.GetComponentInChildren<Rigidbody2D>().rotation;
         Quaternion currentRot = Quaternion.Euler(0, 0, z);
         GameObject sg = Instantiate(sensorGhostPrefab, transform.position, currentRot) as GameObject;
         SpriteRenderer sr = sg.GetComponent<SpriteRenderer>();
         sr.sprite = srs[0].sprite;
         sr.material = mat;
-        return sg;
     }
 
     public void MakeObjectFullyVisible()
     {
         if (isBuilding) { return; }
-        if (sensorGhost != null)
-        {
-
-            Destroy(sensorGhost);
-        }
 
         foreach (SpriteRenderer thisSR in srs)
         {
@@ -224,11 +200,4 @@ public class StealthHider : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        if (sensorGhost)
-        {
-            Destroy(sensorGhost);
-        }
-    }
 }

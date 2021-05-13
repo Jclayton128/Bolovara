@@ -104,13 +104,6 @@ public class Health : NetworkBehaviour
 
     }
 
-    //private void SpawnDeathAnimoid()
-    //{
-    //    GameObject deathAnimoid = Instantiate(deathAnimoidPrefab, transform.position, transform.rotation) as GameObject;
-    //    Animator anim = deathAnimoid.GetComponent<Animator>();
-    //    Destroy(deathAnimoid, anim.GetCurrentAnimatorStateInfo(0).length);
-    //}
-
     void OnDestroy()
     {        
         if (hasAuthority)

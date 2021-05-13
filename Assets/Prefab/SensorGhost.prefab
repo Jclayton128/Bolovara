@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8909522313552497859}
   - component: {fileID: 8909522313552497858}
   - component: {fileID: 8983889032545639917}
+  - component: {fileID: 8663993612288350777}
   m_Layer: 0
   m_Name: SensorGhost
   m_TagString: Untagged
@@ -99,3 +100,15 @@ MonoBehaviour:
   normalStrenght: 5
   normalSmoothing: 1
   computingNormal: 0
+--- !u!114 &8663993612288350777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8909522313552497857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 148e22d2f0663e1459840627c5301bdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
