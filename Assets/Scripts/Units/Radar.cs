@@ -143,7 +143,9 @@ public class Radar : NetworkBehaviour
     private void ClampIntensityLevelFloorToSelfNoiseInEachSector()
     {
         float rawNoiseLevel = GetComponentInChildren<StealthHider>().gameObject.GetComponent<CircleCollider2D>().radius;
+
         float selfNoiseLevel = (rawNoiseLevel - .5f) / 4f;
+        Debug.Log($"raw noise: {rawNoiseLevel} turns into {selfNoiseLevel}");
         for (int i = 0; i < 8; i++)
         {
             sectorIntensities[i] = Mathf.Clamp(sectorIntensities[i], selfNoiseLevel, 1);

@@ -26,6 +26,10 @@ public class Movement_Tank : Movement
     protected override void Start()
     {
         base.Start();
+        if (cs.IsRunningOnClient)
+        {
+            this.enabled = false;
+        }
     }
 
     // Update is called once per frame

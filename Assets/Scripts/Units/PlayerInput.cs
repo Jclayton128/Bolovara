@@ -21,6 +21,11 @@ public class PlayerInput : ControlSource
     Vector3 mousePos = new Vector3(0, 0, 0);
     ClientInstance playerAtThisComputer;
 
+    float desHoriz;
+    float desVert;
+    int desSpeedSetting = 1;
+    Vector3 desAimDir = Vector3.zero;
+
     protected override void Start()
     {
         base.Start();
@@ -49,6 +54,7 @@ public class PlayerInput : ControlSource
             base.Update();
             HandleKeyboardInput();
             HandleMouseInput();
+            CmdSendServerSideDesiredInput(desHoriz, desVert, desSpeedSetting, desAimDir);
         }       
     }
 
@@ -82,26 +88,35 @@ public class PlayerInput : ControlSource
 
     private void HandleKeyboardInput()
     {
-        HorizComponent = Input.GetAxis("Horizontal");
-        VertComponent = Input.GetAxis("Vertical");
+        desHoriz = Input.GetAxis("Horizontal");
+        desVert = Input.GetAxis("Vertical");
         HandleGearShifting();
     }
     private void HandleGearShifting()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            SpeedSetting++;
+            desSpeedSetting++;
             //TODO: Play an audioclip with gear shifting 'clunk'
-            if (SpeedSetting > gearShiftPositions.Length)
+            if (desSpeedSetting > gearShiftPositions.Length)
             {
-                SpeedSetting = 1;
+                desSpeedSetting = 1;
             }
         }
 
         if (!shiftKnob) { return; }
-        shiftKnob.transform.position = gearShiftPositions[SpeedSetting - 1].transform.position;
+        shiftKnob.transform.position = gearShiftPositions[desSpeedSetting - 1].transform.position;
     }
 
+    [Command]
+    private void CmdSendServerSideDesiredInput(float horiz, float vert, int speed, Vector3 aim)
+    {
+        HorizComponent = horiz;
+        VertComponent = vert;
+        SpeedSetting = speed;
+        Debug.Log($"{HorizComponent} + {VertComponent} + {SpeedSetting}");
+        AimDir = aim;
+    }
 
     protected override void OnDestroy()
     {

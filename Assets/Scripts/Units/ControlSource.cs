@@ -19,28 +19,34 @@ public abstract class ControlSource : NetworkBehaviour
     protected int layerMask_weaponryBlockers = 1 << 8;
 
     //hood
-    public float HorizComponent { get; protected set; }
-    public float VertComponent { get; protected set; }
-    public int SpeedSetting { get; protected set; } = 1;  //Should be either 1, 2, or 3
-    public Vector3 AimDir { get; protected set; }
+    public float HorizComponent; //{ get; protected set; }
+    public float VertComponent;  //{ get; protected set; }
+    public int SpeedSetting = 1; // { get; protected set; } = 1;  //Should be either 1, 2, or 3
+    public Vector3 AimDir; // { get; protected set; }
+
+    protected bool isFollowMeOn = true;
 
     protected float timeSinceLastScan = 0;
     //public int currentTerrainType { get; protected set; } = 3;
     public int currentTerrainType;
-    protected bool isFollowMeOn = true;
+
+    public bool IsRunningOnServer { get; private set; } = false;
+    public bool IsRunningOnClient { get; private set; } = false;
+
     //public Vector3 facingTargetPoint;
 
     protected virtual void Start()
     {
      
         move = GetComponentInChildren<Movement>();
-       
-        targetGO = GameObject.FindGameObjectWithTag("Player");
         
         if (TryGetComponent<NavMeshAgent>(out nma))
         {
             nma.updateRotation = false;
         }
+
+        IsRunningOnClient = isClient;
+        IsRunningOnServer = isServer;
 
     }
 
@@ -48,6 +54,7 @@ public abstract class ControlSource : NetworkBehaviour
     protected virtual void Update()
     {
         currentTerrainType = GetCurrentTerrainType();
+
         timeSinceLastScan -= Time.deltaTime;
         if (timeSinceLastScan <= 0)
         {

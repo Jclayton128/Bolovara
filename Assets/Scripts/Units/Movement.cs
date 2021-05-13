@@ -33,7 +33,10 @@ public class Movement : MonoBehaviour
             cs = GetComponent<ControlSource>();
         if (!rb)
             rb = GetComponent<Rigidbody2D>();
-        CheckForCommandedMovement();
+        if (cs.IsRunningOnServer)
+        {
+            CheckForCommandedMovement();
+        }
     }
     protected virtual void CheckForCommandedMovement()
     {

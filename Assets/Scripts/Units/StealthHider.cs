@@ -11,7 +11,7 @@ public class StealthHider : MonoBehaviour
     [SerializeField] Material mat = null;
     SpriteRenderer[] srs;
     Rigidbody2D rb;
-    CircleCollider2D hiderColl;
+    [SerializeField] CircleCollider2D hiderColl;
     ControlSource cs;
     [SerializeField] GameObject sensorGhostPrefab = null;
     //public IFF iff;
@@ -32,7 +32,7 @@ public class StealthHider : MonoBehaviour
     public float hiderRadius_Modified;
     public float hiderRadius_TerrainModifier = 1;
     GameObject sensorGhost;
-    public bool isAvatarOfLocalPlayer = false;
+    bool isAvatarOfLocalPlayer = false;
 
 
     // Start is called before the first frame update
@@ -131,7 +131,7 @@ public class StealthHider : MonoBehaviour
     }
     private void AdjustHiderRadius()
     {
-        //Debug.Log($"coll mod {hiderRadius_Modified} and hider rad {hiderColl.radius}");
+        Debug.Log($"coll mod {hiderRadius_Modified} and hider rad {hiderColl.radius} at speed {rb.velocity.magnitude}");
         if (hiderRadius_Modified > hiderColl.radius)
         {
             //Debug.Log("hider radius needs to grow");

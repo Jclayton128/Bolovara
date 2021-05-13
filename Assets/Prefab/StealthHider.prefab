@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: c82d219d462822642ae9a4842221bdbe, type: 2}
   sensorGhostPrefab: {fileID: 8909522313552497857, guid: 67ca68796374bcb45b023548396f41cf, type: 3}
-  hiderRadius_Base: 1
+  hiderRadius_Base: 2
   hiderGrowthRate: 1
   hiderShrinkRate: 1
   attackModifier: 3

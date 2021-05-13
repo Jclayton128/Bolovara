@@ -171,6 +171,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  HorizComponent: 0
+  VertComponent: 0
+  SpeedSetting: 1
+  AimDir: {x: 0, y: 0, z: 0}
   currentTerrainType: 0
   gearShiftPositions:
   - {fileID: 0}
@@ -192,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 1
+  clientAuthority: 0
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
@@ -264,6 +268,7 @@ MonoBehaviour:
   hurtAudioClips: []
   dieAudioClips: []
   spritesByHealth: []
+  healthBar: {fileID: 0}
   startingHealth: 3
   armorLevel: 0
   canMove: 1
@@ -319,6 +324,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  rs: {fileID: 0}
+  ut: {fileID: 0}
+  playerAtThisComputer: {fileID: 0}
+  uim: {fileID: 0}
   targets: []
   timeBetweenScans: 0.3
   radarAccuracy: 15
