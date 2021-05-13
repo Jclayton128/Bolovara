@@ -23,18 +23,13 @@ public class CityManager : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
 
-        cityNameTextBar = GameObject.FindGameObjectWithTag("CityNameTextBar").GetComponent<TextMeshProUGUI>();
     }
-
-
 
     private void Update()
     {
-        closestCS = FindNearestCitySquare(player.transform);
-        DisplayCityName();
-        BoldCityNameIfWithinRange();
+        //DisplayCityName();
+        //BoldCityNameIfWithinRange();
       
     }
 
@@ -50,12 +45,12 @@ public class CityManager : MonoBehaviour
 
     private void DisplayCityName()
     {
-        cityNameTextBar.text = closestCS.cityName;
+        //cityNameTextBar.text = closestCS.cityName;
     }
     private void BoldCityNameIfWithinRange()
     {
         float dist = (player.transform.position - closestCS.transform.position).magnitude;
-        if (dist <= closestCS.cityRadius)
+        if (dist <= closestCS.CityRadius)
         {
             cityNameTextBar.fontStyle = TMPro.FontStyles.Bold;
         }

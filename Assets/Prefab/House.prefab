@@ -209,6 +209,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c04d552402ca65448b9cb789fafa45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  am: {fileID: 0}
+  possibleHouseSprites:
+  - {fileID: -5809132127048867963, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: -8742719537365509113, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: -2300724716225217573, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: -973729513825381805, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: 5371691335423880786, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: -4330385093667011837, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: -6590268244877230249, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: -2437946883914093047, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: 7925904088023432219, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: 9126172486708747978, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: 1420018418705480783, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: 8425387523348974190, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: -6856418758133539898, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: -9153175884436138954, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: -1406890998072042038, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: 6948900975394784487, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: -7851119537274375705, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: 6681069481114156387, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: -610499168571568192, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  - {fileID: 2747004687852492456, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
+  iff: {fileID: 5077878748564468321}
+  isHouse: 1
+  owner: {fileID: 0}
 --- !u!114 &7548835469805105314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,5 +302,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e3b4e4466d9f549bf80b5dddb85513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flagSR: {fileID: 0}
+  flagSR: {fileID: 1792896821730310804}
   iffAllegiance: 0

@@ -33,15 +33,6 @@ public class AllegianceManager : MonoBehaviour
         sl = FindObjectOfType<SceneLoader>();
     }
 
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public int GetNumberOfFactionsIncludingFeral()
     {
         return flagSource.Length;
