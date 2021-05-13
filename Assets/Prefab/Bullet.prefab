@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5862694335840644350}
   - component: {fileID: 589940425147871913}
   - component: {fileID: 2970772283787772964}
+  - component: {fileID: -7418526711016459858}
   m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
@@ -153,3 +154,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponImpactAnimationPrefab: {fileID: 4736777088589369892, guid: dbb37f06f07bed74a84cf8b04cfb33a1, type: 3}
+--- !u!58 &-7418526711016459858
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459045170686098954}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.06}
+  serializedVersion: 2
+  m_Radius: 0.03
