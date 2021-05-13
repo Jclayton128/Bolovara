@@ -17,6 +17,7 @@ public class Health : NetworkBehaviour
     UIManager uim;
     [SerializeField] Slider healthBar;
 
+
     SpriteRenderer sr;
     AudioClip chosenHurtSound;
     AudioClip chosenDieSound;
@@ -97,20 +98,30 @@ public class Health : NetworkBehaviour
 
             AudioSource.PlayClipAtPoint(chosenDieSound, transform.position);
         }
-        BroadcastMessage("DyingActions", SendMessageOptions.DontRequireReceiver);
-        GameObject deathAnimoid = Instantiate(deathAnimoidPrefab, transform.position, transform.rotation) as GameObject;
-        Animator anim = deathAnimoid.GetComponent<Animator>();
-        Destroy(deathAnimoid, anim.GetCurrentAnimatorStateInfo(0).length);
-        Destroy(transform.root.gameObject);
+        //BroadcastMessage("DyingActions", SendMessageOptions.DontRequireReceiver);
+        SpawnDeathAnimoid(deathAnimoidPrefab, transform.position);
+        Destroy(gameObject);
 
     }
 
+    //private void SpawnDeathAnimoid()
+    //{
+    //    GameObject deathAnimoid = Instantiate(deathAnimoidPrefab, transform.position, transform.rotation) as GameObject;
+    //    Animator anim = deathAnimoid.GetComponent<Animator>();
+    //    Destroy(deathAnimoid, anim.GetCurrentAnimatorStateInfo(0).length);
+    //}
+
     void OnDestroy()
-    {
+    {        
         if (hasAuthority)
         {
             ClientInstance.ReturnClientInstance().SetupAvatarRespawn();
         }
+    }
+    private void SpawnDeathAnimoid(GameObject animoidPrefab, Vector3 position)
+    {
+        GameObject deathAnimoid = Instantiate(animoidPrefab, position, Quaternion.identity) as GameObject;
+        NetworkServer.Spawn(deathAnimoid);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
