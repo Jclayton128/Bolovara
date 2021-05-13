@@ -83,7 +83,7 @@ public class PlayerInput : ControlSource
 
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
-        AimDir = (mousePos - transform.position).normalized;
+        desAimDir = (mousePos - transform.position).normalized;
     }
 
     private void HandleKeyboardInput()
