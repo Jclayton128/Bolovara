@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 9127802627311162776}
   - component: {fileID: 2063790580221910251}
   - component: {fileID: -4120293405561646783}
+  - component: {fileID: 1200691773861183226}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Untagged
@@ -84,7 +85,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1271162639
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b0ec4a14ef051694c887c4ea60d064dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -334,6 +335,20 @@ MonoBehaviour:
   radarRange: 30
   signalFudge: 0.1
   maxRandomNoise: 0.1
+--- !u!114 &1200691773861183226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4164942101872321102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e3b4e4466d9f549bf80b5dddb85513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flagSR: {fileID: 0}
+  iffAllegiance: 0
 --- !u!1 &8033423632718691546
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +419,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1271162639
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 16f538a9f1a4c3e42af5b33d53e0aeb7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

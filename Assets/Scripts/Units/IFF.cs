@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class IFF : MonoBehaviour
 {
     //init
-    SpriteRenderer flagSR;
+    [SerializeField] SpriteRenderer flagSR = null;
     AllegianceManager am;
     Image flagImage;
 
@@ -16,12 +16,6 @@ public class IFF : MonoBehaviour
 
     private void Start()
     {
-        if (TryGetComponent<SpriteRenderer>(out SpriteRenderer sr))
-        {
-            if (GetComponent<ControlSource>()) { return; }  //things with a control source don't have an allegiance flag.
-            flagSR = sr;
-        }
-
         am = FindObjectOfType<AllegianceManager>();
         GetFlagUIElement();
         SetFlag();

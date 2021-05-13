@@ -10,7 +10,7 @@ public class CitySquare : MonoBehaviour
 {
 
     //init
-    public IFF iff;
+    IFF iff;
     SpriteRenderer sr;
     [SerializeField] GameObject housePrefab = null;
     [SerializeField] GameObject turretPrefab = null;
@@ -28,12 +28,14 @@ public class CitySquare : MonoBehaviour
 
     void Start()
     {
+        iff = GetComponent<IFF>();
         am = FindObjectOfType<AllegianceManager>();
         sr = GetComponent<SpriteRenderer>();
         SelectCityName();
         SpawnHousesWithinCity(numberOfHousesToSpawn);
         ConvertHousesToTurrets();
         SetAllegianceForBuildingsInCity(iff.GetIFFAllegiance());
+
     }
 
     #region creation
@@ -132,8 +134,8 @@ public class CitySquare : MonoBehaviour
     }
     private void SelectCityName()
     {
-        CityManager cnm = FindObjectOfType<CityManager>();
-        cityName = cnm.GetRandomCityName();
+        CityManager cm = FindObjectOfType<CityManager>();
+        cityName = cm.GetRandomCityName();
     }
 
     public void SetAllegianceForBuildingsInCity(int newIFF)
