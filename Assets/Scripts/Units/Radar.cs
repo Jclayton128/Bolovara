@@ -19,6 +19,7 @@ public class Radar : NetworkBehaviour
     [SerializeField] float radarAccuracy; //15  //how far off can the direction-of-arrival be, in degrees.
     [SerializeField] float radarRange;  //30
     [SerializeField] float signalFudge;  //0.05
+    [SerializeField] float maxRandomNoise; //0.1
 
     //hood
     float timeSinceLastScan = 0;
@@ -59,6 +60,9 @@ public class Radar : NetworkBehaviour
                 ResetSectorIntensityToZero();
                 GetTargets();
                 IncreaseIntensityFromNoiseInEachSector();
+                InjectRandomNoise();
+                InjectRandomNoise();
+                InjectRandomNoise();  // Two rounds of noise inject
                 ClampIntensityLevelFloorToSelfNoiseInEachSector();
                 TargetPushSectorIntensityToRadarScreen();
                 timeSinceLastScan = 0;
@@ -127,7 +131,12 @@ public class Radar : NetworkBehaviour
         signedAngFromNorth += randomSpread;
         return signedAngFromNorth;
     }
-
+    private void InjectRandomNoise()
+    {
+        int randSector = UnityEngine.Random.Range(0, 7);
+        float randNoise = UnityEngine.Random.Range(0, maxRandomNoise);
+        sectorIntensities[randSector] += randNoise;
+    }
     private float DetermineSignalIntensity(GameObject target)
     {
         float dist = (target.transform.position - transform.position).magnitude;

@@ -114,7 +114,6 @@ public class PlayerInput : ControlSource
         HorizComponent = horiz;
         VertComponent = vert;
         SpeedSetting = speed;
-        Debug.Log($"{HorizComponent} + {VertComponent} + {SpeedSetting}");
         AimDir = aim;
     }
 

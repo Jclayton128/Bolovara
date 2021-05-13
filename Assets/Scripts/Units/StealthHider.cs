@@ -131,7 +131,7 @@ public class StealthHider : MonoBehaviour
     }
     private void AdjustHiderRadius()
     {
-        Debug.Log($"coll mod {hiderRadius_Modified} and hider rad {hiderColl.radius} at speed {rb.velocity.magnitude}");
+        //Debug.Log($"coll mod {hiderRadius_Modified} and hider rad {hiderColl.radius} at speed {rb.velocity.magnitude}");
         if (hiderRadius_Modified > hiderColl.radius)
         {
             //Debug.Log("hider radius needs to grow");

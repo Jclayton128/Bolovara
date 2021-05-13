@@ -332,7 +332,8 @@ MonoBehaviour:
   timeBetweenScans: 0.3
   radarAccuracy: 15
   radarRange: 30
-  signalFudge: 0.05
+  signalFudge: 0.07
+  maxRandomNoise: 0.1
 --- !u!1 &8033423632718691546
 GameObject:
   m_ObjectHideFlags: 0
