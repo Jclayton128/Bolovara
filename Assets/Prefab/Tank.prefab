@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 2063790580221910251}
   - component: {fileID: -4120293405561646783}
   - component: {fileID: 1200691773861183226}
+  - component: {fileID: -3880857150185815367}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Untagged
@@ -44,6 +45,7 @@ Transform:
   - {fileID: 6577860182831269234}
   - {fileID: 8460459276192748113}
   - {fileID: 2649236498989766230}
+  - {fileID: 3473504071842447403}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -250,7 +252,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.21
+  m_Radius: 0.27
 --- !u!114 &2208610583293660266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +351,87 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flagSR: {fileID: 0}
   iffAllegiance: 0
+--- !u!114 &-3880857150185815367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4164942101872321102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02de46c1d472298418e86fffa83579b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  cityCaptureSlider: {fileID: 0}
+  cityNameTMP: {fileID: 0}
+  time: 0
+  maxTime: 0
+--- !u!1 &5187904961101324016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3473504071842447403}
+  - component: {fileID: 4343231130058601017}
+  - component: {fileID: 4333753491061192870}
+  m_Layer: 16
+  m_Name: CaptureTool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3473504071842447403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5187904961101324016}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4164942101872321107}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4343231130058601017
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5187904961101324016}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.15
+--- !u!114 &4333753491061192870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5187904961101324016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec0f629a0f041c498ac2fdef621982d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cs: {fileID: -3161848990018943978}
+  iff: {fileID: 1200691773861183226}
+  cityToCapture: {fileID: 0}
 --- !u!1 &8033423632718691546
 GameObject:
   m_ObjectHideFlags: 0

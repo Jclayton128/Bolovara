@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 //[RequireComponent(typeof(MoneyHolder), typeof(IFF), typeof(HouseHolder))]
 
-public class FactionLeader : MonoBehaviour
+public class FactionLeader : NetworkBehaviour
 {
     //init
     AllegianceManager am;
-    [SerializeField] int masterIFFAllegiance = 5;
+    [SyncVar]
+    int masterIFFAllegiance;
 
 
     void Start()

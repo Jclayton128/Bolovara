@@ -21,6 +21,7 @@ public class ClientInstance : NetworkBehaviour
     {
         OnAvatarSpawned?.Invoke(go);
         currentAvatar = go;
+
     }
 
 
@@ -57,11 +58,12 @@ public class ClientInstance : NetworkBehaviour
     #endregion
 
     #region Server
-
     [Server]
     private void NetworkSpawnAvatar()
     {
         GameObject go = Instantiate(tankPrefab, transform.position, Quaternion.identity);
+        int masterIFF = GetComponent<FactionLeader>().GetMasterIFFAllegiance();
+        go.GetComponent<IFF>().SetIFFAllegiance(masterIFF);
         NetworkServer.Spawn(go, base.connectionToClient);
     }
 

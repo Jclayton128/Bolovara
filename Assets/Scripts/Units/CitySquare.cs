@@ -19,11 +19,13 @@ public class CitySquare : NetworkBehaviour
     public float CityRadius { get; protected set; } = 4f;
     int numberOfHousesToSpawn = 6;
     int numberOfTurretsToSpawn = 1;
+    float timeToCapture = 2f;
 
     //hood
     public string cityName { get; protected set; }
     public List<Building> housesInCity = new List<Building>();
     public List<Building> turretsInCity = new List<Building>();
+    public float timeSpentCapturing = 0;
 
     public override void OnStartServer()
     {
@@ -144,10 +146,35 @@ public class CitySquare : NetworkBehaviour
             turret.UpdateCurrentOwner();
         }
     }
-    #endregion  
+    #endregion
 
+    #region capturing
 
+    private void Update()
+    {
+        timeSpentCapturing -= (Time.deltaTime / 2f);  //Constant drain on capture time.
+        timeSpentCapturing = Mathf.Clamp(timeSpentCapturing, 0, timeToCapture+1);
+    }
+    public void BuildCaptureTime(float time)
+    {
+        timeSpentCapturing += time;
+    }
+    public void ResetCaptureStatus()
+    {
+        timeSpentCapturing = 0;
+    }
 
+    public float GetTimeSpentCapturing()
+    {
+        return timeSpentCapturing;
+    }
+
+    public float GetTimeRequiredToCapture()
+    {
+        return timeToCapture;
+    }
+
+    #endregion
     public void RemoveBuildingFromList(Building deadThing)
     {
         housesInCity.Remove(deadThing);

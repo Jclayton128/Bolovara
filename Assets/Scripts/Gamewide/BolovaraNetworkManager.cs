@@ -18,9 +18,9 @@ public class BolovaraNetworkManager : NetworkManager
             : Instantiate(playerPrefab);
 
         player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
-        player.GetComponent<FactionLeader>().SetMasterIFFAllegiance(numPlayers + 1); // numPlayers is zero until player is added later;
         LocalPlayers[conn] = player.GetComponent<NetworkIdentity>();
         NetworkServer.AddPlayerForConnection(conn, player);
+        player.GetComponent<FactionLeader>().SetMasterIFFAllegiance(5); //numPlayers + 1); // numPlayers is zero until player is added later;
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)

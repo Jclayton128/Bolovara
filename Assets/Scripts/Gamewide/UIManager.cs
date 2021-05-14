@@ -22,6 +22,7 @@ public class UIManager : NetworkBehaviour
     [SerializeField] Slider energyBar = null;
     [SerializeField] Image weaponIcon = null;
     [SerializeField] Slider cityCaptureSlider = null;
+    [SerializeField] TextMeshProUGUI cityNameTMP = null;
     [SerializeField] RadarScreen radarScreen = null;
     [SerializeField] TextMeshProUGUI followMeText = null;
 
@@ -153,6 +154,19 @@ public class UIManager : NetworkBehaviour
         if (askingCI == playerAtThisComputer)
         {
             return cityCaptureSlider;
+        }
+        else
+        {
+            //Debug.Log("Asking GO is not the local player! No UI for you!");
+            return null;
+        }
+    }
+
+    public TextMeshProUGUI GetCityNameTMP(ClientInstance askingCI)
+    {
+        if (askingCI == playerAtThisComputer)
+        {
+            return cityNameTMP;
         }
         else
         {

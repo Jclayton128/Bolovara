@@ -32,6 +32,7 @@ public abstract class ControlSource : NetworkBehaviour
 
     public bool IsRunningOnServer { get; private set; } = false;
     public bool IsRunningOnClient { get; private set; } = false;
+    public ClientInstance ci { get; private set; }
 
     //public Vector3 facingTargetPoint;
 
@@ -47,6 +48,12 @@ public abstract class ControlSource : NetworkBehaviour
 
         IsRunningOnClient = isClient;
         IsRunningOnServer = isServer;
+
+
+        if (IsRunningOnClient)
+        {
+            ci = ClientInstance.ReturnClientInstance();
+        }
 
     }
 

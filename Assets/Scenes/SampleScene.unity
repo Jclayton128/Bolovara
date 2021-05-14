@@ -22552,7 +22552,8 @@ MonoBehaviour:
   flag: {fileID: 1226187139}
   energyBar: {fileID: 0}
   weaponIcon: {fileID: 0}
-  cityCaptureSlider: {fileID: 0}
+  cityCaptureSlider: {fileID: 1793781718}
+  cityNameTMP: {fileID: 360487849}
   radarScreen: {fileID: 619505272}
   followMeText: {fileID: 0}
 --- !u!1 &989318382
