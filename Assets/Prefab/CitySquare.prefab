@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flagSR: {fileID: 8948923618644986686}
-  iffAllegiance: 3
+  iffAllegiance: 0
 --- !u!114 &8425757706622562095
 MonoBehaviour:
   m_ObjectHideFlags: 0

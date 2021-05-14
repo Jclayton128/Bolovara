@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6809565278509929251}
   - component: {fileID: 6809565278509929250}
   - component: {fileID: 6809565278509929277}
+  - component: {fileID: -4000130467775156451}
   m_Layer: 0
   m_Name: DummyFactionLeader
   m_TagString: Untagged
@@ -46,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b02774a19ce366419c345ce3e0298b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &6809565278509929251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,7 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182af7169afbd29438913ddfd54ad9d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfHouses: 0
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &6809565278509929277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,3 +91,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyBar: {fileID: 0}
   money: 0
+--- !u!114 &-4000130467775156451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809565278509929276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Mirror;
 
-public class HouseHolder : MonoBehaviour
+public class HouseHolder : NetworkBehaviour
 {
     //init
     TextMeshProUGUI houseCounter;
@@ -11,40 +12,33 @@ public class HouseHolder : MonoBehaviour
 
     //param
 
-    //hood
-    public int numberOfHouses = 0;
+    [SyncVar(hook = nameof(UpdateUI))]
+    int numberOfHouses = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        //houseCounter = FindObjectOfType<UIManager>().GetHouseCounter(gameObject);
+        ClientInstance ci = ClientInstance.ReturnClientInstance();
+        houseCounter = FindObjectOfType<UIManager>().GetHouseCounter(ci);
     }
-
-    public void Reinitialize()
-    {
-        Start();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateUI();
-    }
-
+     
     public void DecrementHouseCount()
     {
-        numberOfHouses--;
-        UpdateUI();
-
+        if (isServer)
+        {
+            numberOfHouses--;
+        }
     }
 
     public void IncrementHouseCount()
     {
-        numberOfHouses++;
-        UpdateUI();
+        if (isServer)
+        {
+            numberOfHouses++;
+        }
     }
 
-    private void UpdateUI()
+    private void UpdateUI(int placeholder1, int placeholder2)
     {
         if (!houseCounter) { return; }
         houseCounter.text = numberOfHouses.ToString();
