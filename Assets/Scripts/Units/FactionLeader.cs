@@ -7,19 +7,23 @@ public class FactionLeader : MonoBehaviour
 {
     //init
     AllegianceManager am;
-    IFF iff;
+    [SerializeField] int masterIFFAllegiance = 5;
+
 
     void Start()
     {
         am = FindObjectOfType<AllegianceManager>();
-        iff = transform.root.GetComponentInChildren<IFF>();
-        am.AddFactionLeaderToList(iff.GetIFFAllegiance(), this);
-        //Debug.Log(gameObject.name + " attempted to add an FL for allegiance: " + iff.GetIFFAllegiance());
+        am.AddFactionLeaderToList(masterIFFAllegiance, this);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetMasterIFFAllegiance(int alleg)
     {
-        
+        masterIFFAllegiance = alleg;
     }
+
+    public int GetMasterIFFAllegiance()
+    {
+        return masterIFFAllegiance;
+    }
+
 }

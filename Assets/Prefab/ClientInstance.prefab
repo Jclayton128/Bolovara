@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2050943025336066580}
   - component: {fileID: 2395329726725920283}
   - component: {fileID: 649230887957437667}
+  - component: {fileID: 3041591117104403199}
   m_Layer: 0
   m_Name: ClientInstance
   m_TagString: Untagged
@@ -65,3 +66,15 @@ MonoBehaviour:
   syncInterval: 0.1
   tankPrefab: {fileID: 4164942101872321102, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
   currentAvatar: {fileID: 0}
+--- !u!114 &3041591117104403199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582586595392057884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b02774a19ce366419c345ce3e0298b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

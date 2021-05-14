@@ -57,21 +57,8 @@ public class CitySquare : NetworkBehaviour
                 Vector2 pos = UnityEngine.Random.insideUnitCircle * CityRadius;
                 Vector3 pos3 = pos;
                 gridSnappedPos = new Vector3(Mathf.Round(pos.x / gridUnit), Mathf.Round(pos.y / gridUnit), 0);
-
-                //if (Mathf.Abs(gridSnappedPos.x) < cityMinDistFromSquare)
-                //{
-                //    float sign = Mathf.Sign(gridSnappedPos.x);
-                //    gridSnappedPos.x = cityMinDistFromSquare * sign;
-                //}
-                //if (Mathf.Abs(gridSnappedPos.y) < cityMinDistFromSquare)
-                //{
-                //    float sign = Mathf.Sign(gridSnappedPos.y);
-                //    gridSnappedPos.y = cityMinDistFromSquare * sign;
-                //}
-
                 Vector3 halfStep = (new Vector3(1, 1, 0)) * gridUnit / 2f;
-                actualPos = transform.position + gridSnappedPos + halfStep;
-                //Debug.Log($"generated pos: {pos}, which is dist {(transform.position - pos3).magnitude} and {gridSnappedPos} is gsp.  ActualPos is {actualPos}. Distance is {(transform.position - actualPos).magnitude}");
+                actualPos = transform.position + gridSnappedPos + halfStep;               
 
             }
             while (!(IsTestLocationValid_NavMesh(actualPos) & IsTestLocationValid_Physics(actualPos)));

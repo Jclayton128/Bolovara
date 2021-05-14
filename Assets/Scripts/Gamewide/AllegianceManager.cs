@@ -10,10 +10,12 @@ public class AllegianceManager : MonoBehaviour
     SceneLoader sl;
 
     [SerializeField] Sprite[] flagSource = null;
-    public SortedList<int, FactionLeader> factionLeaders = new SortedList<int, FactionLeader>();
+    SortedList<int, FactionLeader> factionLeaders = new SortedList<int, FactionLeader>();
+    [SerializeField] int factionsInPlay = 0;
 
     //hood
-    private int playerAllegiance = -1;
+    int playerAllegiance; // remove shim
+
 
     private void Awake()
     {
@@ -50,13 +52,20 @@ public class AllegianceManager : MonoBehaviour
     {
         if (factionLeaders.ContainsKey(allegiance))
         {
-            //Debug.Log("faction " + allegiance + " already has a leader!");
+            Debug.Log("faction " + allegiance + " already has a leader!");
         }
         else
         {
-            //Debug.Log($"added {fl.transform.gameObject} for faction " + allegiance + ".");
+            Debug.Log($"added {fl.transform.gameObject} for faction " + allegiance + ".");
             factionLeaders.Add(allegiance, fl);
+            factionsInPlay++;
         }
+    }
+
+    public void RemoveFactionLeaderFromList(int flAllegiance)
+    {
+        factionLeaders.Remove(flAllegiance);
+        factionsInPlay--;
     }
 
     public void ReplaceFactionLeaderOnList(int allegiance, FactionLeader newFL)

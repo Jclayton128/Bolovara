@@ -74,7 +74,6 @@ public class Building : MonoBehaviour
 
         if (!GetComponent<DefenseTurret>())
         {
-
             if (owner) //don't decrement if there isn't a previous owner to decrement from
             {
                 owner.GetComponent<HouseHolder>().DecrementHouseCount();  //owner reference should still be the old owner

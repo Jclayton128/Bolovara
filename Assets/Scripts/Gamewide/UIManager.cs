@@ -110,7 +110,7 @@ public class UIManager : NetworkBehaviour
         }
     }
 
-    public Image GetFlag(ClientInstance askingCI)
+    public Image GetFlagUIElement(ClientInstance askingCI)
     {
         if (askingCI == playerAtThisComputer)
         {

@@ -12,6 +12,9 @@ public class PlayerInput : ControlSource
     GameObject shiftKnob;
     [SerializeField] Transform[] gearShiftPositions = null;
     TextMeshProUGUI followMeText;
+    Image flagImage;
+    AllegianceManager am;
+    IFF iff;
 
     //param
 
@@ -30,11 +33,11 @@ public class PlayerInput : ControlSource
     {
         base.Start();
         attack = GetComponent<Attack>();
-        HookIntoLocalUI();
-
+        am = FindObjectOfType<AllegianceManager>();
+        HookIntoLocalUISystems();
     }
 
-    private void HookIntoLocalUI()
+    private void HookIntoLocalUISystems()
     {
         if (hasAuthority)
         {
@@ -42,6 +45,14 @@ public class PlayerInput : ControlSource
             uim = FindObjectOfType<UIManager>();
             shiftKnob = uim.GetShiftKnob(playerAtThisComputer);
             uim.GetShiftPositions(playerAtThisComputer, out gearShiftPositions[0], out gearShiftPositions[1], out gearShiftPositions[2]);
+
+            iff = GetComponent<IFF>();
+            int myIFF = playerAtThisComputer.GetComponent<FactionLeader>().GetMasterIFFAllegiance();
+            iff.SetIFFAllegiance(myIFF);
+            flagImage = uim.GetFlagUIElement(playerAtThisComputer);
+            flagImage.sprite = am.GetFlagOfAllegiance(myIFF);
+
+                                   
         }
     }
 
