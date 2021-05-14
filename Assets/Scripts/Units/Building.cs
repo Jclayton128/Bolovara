@@ -61,7 +61,7 @@ public class Building : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        //GenerateMoneyForOwner();
+        GenerateMoneyForOwner();
     }
 
     private void GenerateMoneyForOwner()
