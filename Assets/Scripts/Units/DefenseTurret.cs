@@ -41,8 +41,8 @@ public class DefenseTurret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ScanForTarget();
-        FireWeaponAtTarget();
+        //ScanForTarget();
+        //FireWeaponAtTarget();
     }
 
     private void ScanForTarget()

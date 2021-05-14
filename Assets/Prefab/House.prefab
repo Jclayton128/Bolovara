@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  deathAnimoidPrefab: {fileID: 0}
+  deathAnimoidPrefab: {fileID: 4736777088589369892, guid: dd50caacceff75449a8e5e0fbb3b6ec0, type: 3}
   hurtAudioClips: []
   dieAudioClips: []
   spritesByHealth: []

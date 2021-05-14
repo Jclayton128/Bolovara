@@ -9,8 +9,6 @@ public class BolovaraNetworkManager : NetworkManager
     [SerializeField] AllegianceManager am;
     int playerCount = 0;
 
-
-
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         //base.OnServerAddPlayer();

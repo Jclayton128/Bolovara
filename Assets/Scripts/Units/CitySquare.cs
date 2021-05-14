@@ -25,16 +25,17 @@ public class CitySquare : NetworkBehaviour
     public List<Building> housesInCity = new List<Building>();
     public List<Building> turretsInCity = new List<Building>();
 
-    void Start()
+    public override void OnStartServer()
     {
+        base.OnStartServer();
         iff = GetComponent<IFF>();
         am = FindObjectOfType<AllegianceManager>();
         sr = GetComponent<SpriteRenderer>();
         SelectCityName();
         SpawnHousesWithinCity(numberOfHousesToSpawn);
         ConvertHousesToTurrets();
-        SetAllegianceForBuildingsInCity(iff.GetIFFAllegiance());
-
+        iff.SetIFFAllegiance(IFF.feralIFF);
+        SetAllegianceForBuildingsInCity(IFF.feralIFF);
     }
 
     #region creation
@@ -69,6 +70,7 @@ public class CitySquare : NetworkBehaviour
             house.am = am;
             house.InitializeBuilding();
             house.SetOwningCity(this);
+            NetworkServer.Spawn(newHouse);
         }
     }
 
@@ -83,8 +85,10 @@ public class CitySquare : NetworkBehaviour
             Building turret = newTurret.GetComponent<Building>();
             turret.am = am;
             turret.SetOwningCity(this);
+            NetworkServer.Spawn(newTurret);
             turretsInCity.Add(turret);
             housesInCity.Remove(houseToReplace.GetComponent<Building>());
+            NetworkServer.UnSpawn(houseToReplace);
             Destroy(houseToReplace);
         }
     }

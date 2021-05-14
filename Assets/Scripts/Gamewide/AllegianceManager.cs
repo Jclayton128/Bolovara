@@ -12,6 +12,8 @@ public class AllegianceManager : MonoBehaviour
     [SerializeField] Sprite[] flagSource = null;
     SortedList<int, FactionLeader> factionLeaders = new SortedList<int, FactionLeader>();
     [SerializeField] int factionsInPlay = 0;
+    GameObject feralFactionLeader;
+    [SerializeField] GameObject dummyFactionLeaderPrefab = null;
 
     //hood
     int playerAllegiance; // remove shim
@@ -31,8 +33,12 @@ public class AllegianceManager : MonoBehaviour
     }
     void Start()
     {
-
         sl = FindObjectOfType<SceneLoader>();
+    }
+
+    private void CreateFeralFactionLeader()
+    {
+        feralFactionLeader = Instantiate(dummyFactionLeaderPrefab, transform.position, transform.rotation) as GameObject;
     }
 
     public int GetNumberOfFactionsIncludingFeral()
@@ -80,10 +86,19 @@ public class AllegianceManager : MonoBehaviour
     public FactionLeader GetFactionLeader(int iffAllegiance)
     {
         //Debug.Log($"I was asked for the faction leader for {iffAllegiance}");
+
+        if (iffAllegiance == 0 && !factionLeaders.ContainsKey(0))
+        {
+            CreateFeralFactionLeader();
+            factionLeaders.Add(0, feralFactionLeader.GetComponent<FactionLeader>());
+            return feralFactionLeader.GetComponent<FactionLeader>();
+        }
+
         if (!factionLeaders.ContainsKey(iffAllegiance) || factionLeaders[iffAllegiance] == null)
         {
-            Debug.Log($"A faction leader doesn't exist for {iffAllegiance}. Returning to Feral");
-            return factionLeaders[IFF.feralIFF];
+            Debug.Log($"A faction leader doesn't exist for {iffAllegiance}.");
+            return null;
+            //return factionLeaders[IFF.feralIFF];
         }
         else
         {

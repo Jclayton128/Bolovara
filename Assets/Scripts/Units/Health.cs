@@ -98,7 +98,7 @@ public class Health : NetworkBehaviour
 
             AudioSource.PlayClipAtPoint(chosenDieSound, transform.position);
         }
-        //BroadcastMessage("DyingActions", SendMessageOptions.DontRequireReceiver);
+        SendMessage("DyingActions", SendMessageOptions.DontRequireReceiver);
         SpawnDeathAnimoid(deathAnimoidPrefab, transform.position);
         Destroy(gameObject);
 

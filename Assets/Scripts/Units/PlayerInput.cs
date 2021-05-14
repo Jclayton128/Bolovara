@@ -50,9 +50,7 @@ public class PlayerInput : ControlSource
             int myIFF = playerAtThisComputer.GetComponent<FactionLeader>().GetMasterIFFAllegiance();
             iff.SetIFFAllegiance(myIFF);
             flagImage = uim.GetFlagUIElement(playerAtThisComputer);
-            flagImage.sprite = am.GetFlagOfAllegiance(myIFF);
-
-                                   
+            flagImage.sprite = am.GetFlagOfAllegiance(myIFF);                                   
         }
     }
 

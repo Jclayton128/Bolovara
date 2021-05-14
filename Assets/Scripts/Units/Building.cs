@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer), typeof(IFF))]
-public class Building : MonoBehaviour
+public class Building : NetworkBehaviour
 {
     //init
     UnitTracker ut;
@@ -24,7 +25,10 @@ public class Building : MonoBehaviour
     float timeSinceLastMoneyDrop;
 
 
-
+    public override void OnStartServer()
+    {
+        InitializeBuilding();
+    }
     public void InitializeBuilding()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -37,6 +41,17 @@ public class Building : MonoBehaviour
         //UpdateCurrentOwner();
         timeSinceLastMoneyDrop = UnityEngine.Random.Range(0, timeBetweenMoneyDrops);
     }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        sr = GetComponent<SpriteRenderer>();
+        if (isHouse)
+        {
+            ChooseHouseImage();
+        }
+    }
+
     private void ChooseHouseImage()
     {
         int rand = UnityEngine.Random.Range(0, possibleHouseSprites.Length);
@@ -46,7 +61,7 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GenerateMoneyForOwner();
+        //GenerateMoneyForOwner();
     }
 
     private void GenerateMoneyForOwner()

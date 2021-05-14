@@ -33,7 +33,10 @@ public class IFF : MonoBehaviour
     private void SetFlag()
     {
         if (!flagSR) { return; }
-        Debug.Log(gameObject + "is still the prob because of " + am);
+        if (!am)
+        {
+            am = FindObjectOfType<AllegianceManager>();
+        }
         flagSR.sprite = am.GetFlagOfAllegiance(iffAllegiance);
     }
 
