@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Mirror;
 
-public class MoneyHolder : MonoBehaviour
+public class MoneyHolder : NetworkBehaviour
 {
     //init
     public TextMeshProUGUI moneyBar;
@@ -13,24 +14,13 @@ public class MoneyHolder : MonoBehaviour
     //param
 
     //hood
-    public int money = 0;
+    [SyncVar(hook = nameof(UpdateUI))]
+    int money = 0;
     void Start()
     {
-        //moneyBar = FindObjectOfType<UIManager>().GetMoneyCounter(gameObject);
-        UpdateUI();
+        ClientInstance ci = ClientInstance.ReturnClientInstance();
+        moneyBar = FindObjectOfType<UIManager>().GetMoneyCounter(ci);
 
-    }
-
-    public void Reinitialize()
-    {
-        Start();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public int GetMoneyAmount()
@@ -40,11 +30,13 @@ public class MoneyHolder : MonoBehaviour
 
     public void AddMoney(int amount)
     {
-        money += amount;
-        UpdateUI();
+        if (isServer)
+        {
+            money += amount;
+        }
     }
 
-    private void UpdateUI()
+    private void UpdateUI(int placeholder1, int placeholder2)
     {
         if (!moneyBar) { return; }
         moneyBar.text = "$ " + money.ToString();

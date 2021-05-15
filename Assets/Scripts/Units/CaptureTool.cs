@@ -25,18 +25,12 @@ public class CaptureTool : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("trigger enter 0");
         if (cs.IsRunningOnServer)
         {
-            Debug.Log("trigger enter 1");
             int collisionIFF = collision.GetComponent<IFF>().GetIFFAllegiance();
-            Debug.Log("trigger enter 2");
             int ownIFF = iff.GetIFFAllegiance();
-            Debug.Log("trigger enter 3");
             if ( collisionIFF == ownIFF ) { return; }
-            Debug.Log("trigger enter 4");
             cityToCapture = collision.GetComponent<CitySquare>();
-            Debug.Log("trigger enter 5");
         }
     }
 
@@ -55,6 +49,7 @@ public class CaptureTool : MonoBehaviour
                 cityToCapture.SetAllegianceForBuildingsInCity(newAllegiance);
                 cityToCapture.ResetCaptureStatus();
                 cityToCapture = null;
+                avcuid.UpdateTimes(0, 0);
             }
         }
 
