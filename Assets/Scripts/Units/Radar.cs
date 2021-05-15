@@ -64,7 +64,10 @@ public class Radar : NetworkBehaviour
                 InjectRandomNoise();
                 InjectRandomNoise();  // Two rounds of noise inject
                 ClampIntensityLevelFloorToSelfNoiseInEachSector();
-                TargetPushSectorIntensityToRadarScreen();
+                if (hasAuthority)
+                {
+                    TargetPushSectorIntensityToRadarScreen();
+                }
                 timeSinceLastScan = 0;
             }
         }
@@ -82,7 +85,7 @@ public class Radar : NetworkBehaviour
     [Server]
     private void GetTargets()
     {
-        targets = ut.FindTargetsWithinSearchRange(transform.gameObject, radarRange);  //TODO look for defense turrets too
+        targets = ut.FindUnitsWithinSearchRange(transform.gameObject, radarRange, false);  //TODO look for defense turrets too
     }
     private void IncreaseIntensityFromNoiseInEachSector()
     {
@@ -139,6 +142,7 @@ public class Radar : NetworkBehaviour
     }
     private float DetermineSignalIntensity(GameObject target)
     {
+        if (target == null) { return 0; }
         float dist = (target.transform.position - transform.position).magnitude;
         float dist_normalized = dist / radarRange;
         float targetNoiseLevel = target.GetComponentInChildren<StealthHider>().gameObject.GetComponent<CircleCollider2D>().radius;

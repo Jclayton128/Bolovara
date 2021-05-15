@@ -35,7 +35,8 @@ public class CitySquare : NetworkBehaviour
         sr = GetComponent<SpriteRenderer>();
         SelectCityName();
         SpawnHousesWithinCity(numberOfHousesToSpawn);
-        ConvertHousesToTurrets();
+        SpawnTurretsWithinCity(numberOfTurretsToSpawn);
+        //ConvertHousesToTurrets();
         iff.SetIFFAllegiance(IFF.feralIFF);
         SetAllegianceForBuildingsInCity(IFF.feralIFF);
     }
@@ -70,9 +71,38 @@ public class CitySquare : NetworkBehaviour
             Building house = newHouse.GetComponent<Building>();
             housesInCity.Add(house);
             house.am = am;
-            house.InitializeBuilding();
+            //house.InitializeBuilding();
             house.SetOwningCity(this);
             NetworkServer.Spawn(newHouse);
+        }
+    }
+
+    private void SpawnTurretsWithinCity(int numberOfTurrets)
+    {
+        Grid grid = FindObjectOfType<Grid>();
+        float gridUnit = grid.cellSize.x;
+        for (int i = 0; i < numberOfTurrets; i++)
+        {
+            Vector3 actualPos = Vector3.zero;
+            do
+            {
+                Vector3 gridSnappedPos = Vector3.zero;
+                Vector2 pos = UnityEngine.Random.insideUnitCircle * CityRadius;
+                Vector3 pos3 = pos;
+                gridSnappedPos = new Vector3(Mathf.Round(pos.x / gridUnit), Mathf.Round(pos.y / gridUnit), 0);
+                Vector3 halfStep = (new Vector3(1, 1, 0)) * gridUnit / 2f;
+                actualPos = transform.position + gridSnappedPos + halfStep;
+
+            }
+            while (!(IsTestLocationValid_NavMesh(actualPos) & IsTestLocationValid_Physics(actualPos)));
+
+            GameObject newTurret = Instantiate(turretPrefab, actualPos, housePrefab.transform.rotation) as GameObject;
+            Building turret = newTurret.GetComponent<Building>();
+            turretsInCity.Add(turret);
+            turret.am = am;
+            //house.InitializeBuilding();
+            turret.SetOwningCity(this);
+            NetworkServer.Spawn(newTurret);
         }
     }
 

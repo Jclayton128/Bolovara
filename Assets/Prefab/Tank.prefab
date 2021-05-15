@@ -334,7 +334,7 @@ MonoBehaviour:
   targets: []
   timeBetweenScans: 0.3
   radarAccuracy: 15
-  radarRange: 30
+  radarRange: 20
   signalFudge: 0.1
   maxRandomNoise: 0.1
 --- !u!114 &1200691773861183226

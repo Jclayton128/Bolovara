@@ -36,6 +36,7 @@ public class Building : NetworkBehaviour
         {
             ChooseHouseImage();
         }
+       
         ut = FindObjectOfType<UnitTracker>();
         ut.AddUnitToTargetableList(gameObject);
         //UpdateCurrentOwner();
@@ -97,8 +98,6 @@ public class Building : NetworkBehaviour
             owner.GetComponent<HouseHolder>().IncrementHouseCount();
         }
     }
-
-
     public void DyingActions()
     {
         if (!cs) { return; }
@@ -109,5 +108,13 @@ public class Building : NetworkBehaviour
         }
         cs.RemoveBuildingFromList(this);
         ut.RemoveUnitFromTargetableList(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (isServer)
+        {
+            DyingActions();
+        }
     }
 }
