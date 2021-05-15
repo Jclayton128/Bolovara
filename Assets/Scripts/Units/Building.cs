@@ -59,10 +59,12 @@ public class Building : NetworkBehaviour
         sr.sprite = possibleHouseSprites[rand];
     }
 
-    // Update is called once per frame
     void Update()
     {
-        GenerateMoneyForOwner();
+        if (isServer)
+        {
+            GenerateMoneyForOwner();
+        }
     }
 
     private void GenerateMoneyForOwner()
@@ -70,13 +72,13 @@ public class Building : NetworkBehaviour
         timeSinceLastMoneyDrop -= Time.deltaTime;
         if (timeSinceLastMoneyDrop <= 0)
         {
-            UpdateCurrentOwner();
+            FindCurrentOwner();
             owner.GetComponent<MoneyHolder>().AddMoney(amountOfMoneyOnEachDrop);
             timeSinceLastMoneyDrop = timeBetweenMoneyDrops;
         }
     }
 
-    public void UpdateCurrentOwner()
+    public void FindCurrentOwner()
     {
         owner = am.GetFactionLeader(iff.GetIFFAllegiance()).gameObject;
     }
@@ -103,7 +105,7 @@ public class Building : NetworkBehaviour
         if (!cs) { return; }
         if (!GetComponent<DefenseTurret>())
         {
-            UpdateCurrentOwner();
+            FindCurrentOwner();
             owner.GetComponent<HouseHolder>().DecrementHouseCount();
         }
         cs.RemoveBuildingFromList(this);

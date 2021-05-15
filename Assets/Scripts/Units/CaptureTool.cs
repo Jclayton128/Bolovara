@@ -45,8 +45,8 @@ public class CaptureTool : MonoBehaviour
             if (cityToCapture.GetTimeSpentCapturing() >= cityToCapture.GetTimeRequiredToCapture())
             {
                 int newAllegiance = iff.GetIFFAllegiance();
-                cityToCapture.GetComponent<IFF>().SetIFFAllegiance(newAllegiance);
-                cityToCapture.SetAllegianceForBuildingsInCity(newAllegiance);
+                cityToCapture.GetComponent<IFF>().SetIFFAllegiance(newAllegiance);  // change allegiance of square itself
+                cityToCapture.SetAllegianceForBuildingsInCity(newAllegiance); // change allegiance for all city objects
                 cityToCapture.ResetCaptureStatus();
                 cityToCapture = null;
                 avcuid.UpdateTimes(0, 0);

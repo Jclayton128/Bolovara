@@ -22,9 +22,11 @@ public class CitySquare : NetworkBehaviour
     float timeToCapture = 2f;
 
     //hood
-    public string cityName { get; protected set; }
-    public List<Building> housesInCity = new List<Building>();
-    public List<Building> turretsInCity = new List<Building>();
+    public string cityName { get; protected set; } //TODO sync this.
+
+    public SyncList<Building> hic = new SyncList<Building>();
+    public SyncList<Building> tic = new SyncList<Building>();
+    public SyncList<uint> DraftCount = new SyncList<uint>();
     public float timeSpentCapturing = 0;
 
     public override void OnStartServer()
@@ -69,11 +71,12 @@ public class CitySquare : NetworkBehaviour
 
             GameObject newHouse = Instantiate(housePrefab, actualPos, housePrefab.transform.rotation) as GameObject;
             Building house = newHouse.GetComponent<Building>();
-            housesInCity.Add(house);
             house.am = am;
             //house.InitializeBuilding();
             house.SetOwningCity(this);
             NetworkServer.Spawn(newHouse);
+            hic.Add(house);
+            DraftCount.Add(house.netId);
         }
     }
 
@@ -98,11 +101,12 @@ public class CitySquare : NetworkBehaviour
 
             GameObject newTurret = Instantiate(turretPrefab, actualPos, housePrefab.transform.rotation) as GameObject;
             Building turret = newTurret.GetComponent<Building>();
-            turretsInCity.Add(turret);
+
             turret.am = am;
             //house.InitializeBuilding();
             turret.SetOwningCity(this);
             NetworkServer.Spawn(newTurret);
+            tic.Add(turret);
         }
     }
 
@@ -110,16 +114,16 @@ public class CitySquare : NetworkBehaviour
     {
         for (int i = 0; i < numberOfTurretsToSpawn; i++)
         {
-            if (housesInCity.Count == 0) { return; }
-            int random = UnityEngine.Random.Range(0, housesInCity.Count);
-            GameObject houseToReplace = housesInCity[random].gameObject;
+            if (hic.Count == 0) { return; }
+            int random = UnityEngine.Random.Range(0, hic.Count);
+            GameObject houseToReplace = hic[random].gameObject;
             GameObject newTurret = Instantiate(turretPrefab, houseToReplace.transform.position, turretPrefab.transform.rotation) as GameObject;
             Building turret = newTurret.GetComponent<Building>();
             turret.am = am;
             turret.SetOwningCity(this);
             NetworkServer.Spawn(newTurret);
-            turretsInCity.Add(turret);
-            housesInCity.Remove(houseToReplace.GetComponent<Building>());
+            tic.Add(turret);
+            hic.Remove(houseToReplace.GetComponent<Building>());
             NetworkServer.UnSpawn(houseToReplace);
             Destroy(houseToReplace);
         }
@@ -160,22 +164,23 @@ public class CitySquare : NetworkBehaviour
 
     }
 
-
     public void SetAllegianceForBuildingsInCity(int newIFF)
     {
-        //Debug.Log($"{housesInCity.Count} houses should be changing iff state to {iff.GetIFFAllegiance()}");
+        Debug.Log($"{hic.Count} houses should be changing iff state to {iff.GetIFFAllegiance()}");
         //Debug.Log($"{turretsInCity.Count} turrets should be changing iff state to {iff.GetIFFAllegiance()}");
-        foreach (Building house in housesInCity)
+        foreach (Building house in hic)
         {
             house.SetHouseIFFAllegiance(newIFF);
-            house.UpdateCurrentOwner();
+            house.FindCurrentOwner();
         }
-        foreach (Building turret in turretsInCity)
+        foreach (Building turret in tic)
         {
             turret.SetHouseIFFAllegiance(newIFF);
-            turret.UpdateCurrentOwner();
+            turret.FindCurrentOwner();
         }
     }
+
+
     #endregion
 
     #region capturing
@@ -185,6 +190,7 @@ public class CitySquare : NetworkBehaviour
         timeSpentCapturing -= (Time.deltaTime / 2f);  //Constant drain on capture time.
         timeSpentCapturing = Mathf.Clamp(timeSpentCapturing, 0, timeToCapture+1);
     }
+
     public void BuildCaptureTime(float time)
     {
         timeSpentCapturing += time;
@@ -207,7 +213,7 @@ public class CitySquare : NetworkBehaviour
     #endregion
     public void RemoveBuildingFromList(Building deadThing)
     {
-        housesInCity.Remove(deadThing);
-        turretsInCity.Remove(deadThing);
+        hic.Remove(deadThing);
+        tic.Remove(deadThing);
     }
 }

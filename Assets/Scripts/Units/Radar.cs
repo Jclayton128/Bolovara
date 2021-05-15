@@ -23,6 +23,7 @@ public class Radar : NetworkBehaviour
 
     //hood
     float timeSinceLastScan = 0;
+    [SerializeField] bool hasAHumanOwner;
 
     #region initial setup
     public override void OnStartClient()
@@ -32,6 +33,7 @@ public class Radar : NetworkBehaviour
             playerAtThisComputer = ClientInstance.ReturnClientInstance();
             uim = FindObjectOfType<UIManager>();
             rs = uim.GetRadarScreen(playerAtThisComputer);
+
         }
     }   
 
@@ -39,7 +41,7 @@ public class Radar : NetworkBehaviour
     {
         base.OnStartServer();
         ut = FindObjectOfType<UnitTracker>();
-        PopulateSectorIntensitieswithZero();
+        PopulateSectorIntensitieswithZero();     
     }
     private void PopulateSectorIntensitieswithZero()
     {
@@ -64,10 +66,11 @@ public class Radar : NetworkBehaviour
                 InjectRandomNoise();
                 InjectRandomNoise();  // Two rounds of noise inject
                 ClampIntensityLevelFloorToSelfNoiseInEachSector();
-                if (hasAuthority)
+                if (!isServerOnly)
                 {
-                    TargetPushSectorIntensityToRadarScreen();
+                    TargetPushSectorIntensityToRadarScreen(); //TODO don't let this get called on AI-controlled tanks.
                 }
+            
                 timeSinceLastScan = 0;
             }
         }
