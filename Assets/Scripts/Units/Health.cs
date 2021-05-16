@@ -114,6 +114,7 @@ public class Health : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject otherGO = other.gameObject;
+        if (otherGO = gameObject) { return; } // "Stop hitting yourself, stop hitting yourself"
         HandleDamage(otherGO);
     }
 

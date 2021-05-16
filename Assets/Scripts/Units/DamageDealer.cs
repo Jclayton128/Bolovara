@@ -63,7 +63,7 @@ public class DamageDealer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!weaponImpactAnimationPrefab) { return; }
-        if (collision.gameObject == transform.root.gameObject) { return; }
+        if (collision.gameObject == attackSource) { return; }
         if (!collision.enabled) { return; }
 
         GameObject animation = Instantiate(weaponImpactAnimationPrefab, transform.position, transform.rotation) as GameObject;

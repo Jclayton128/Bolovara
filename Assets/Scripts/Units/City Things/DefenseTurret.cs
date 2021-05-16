@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class DefenseTurret : MonoBehaviour
+using Mirror;
+public class DefenseTurret : NetworkBehaviour
 {
     //init
     [SerializeField] GameObject weaponPrefab = null;
@@ -13,12 +14,12 @@ public class DefenseTurret : MonoBehaviour
     StealthHider sh;
 
     //param
-    public float timeBetweenShots = .25f;
-    public float weaponSpeed = 20f;
-    public float weaponLifetime = .45f;
-    public float weaponDamage = .5f;
+    public float timeBetweenShots; //.25f
+    public float weaponSpeed; //20
+    public float weaponLifetime; //.45f
+    public float weaponDamage;
     public float searchRange = 10f;
-    float bulletOffset = .4f;
+    float bulletOffset = 0.1f;
     float timeBetweenScans = 0.2f;
 
     //hood
@@ -29,20 +30,29 @@ public class DefenseTurret : MonoBehaviour
     float timeSinceLastScan = 0;
 
     // Start is called before the first frame update
-    void Start()
+    public override void OnStartServer()
     {
+        base.OnStartServer();
         ut = FindObjectOfType<UnitTracker>();
         ownIFF = GetComponentInChildren<IFF>();
         attackRange = weaponLifetime * weaponSpeed;
-        selectedFiringSound = SelectSoundFromArray(firingSounds);
         sh = GetComponentInChildren<StealthHider>();
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        selectedFiringSound = SelectSoundFromArray(firingSounds);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //ScanForTarget();
-        //FireWeaponAtTarget();
+        if (isServer)
+        {
+            ScanForTarget();
+            FireWeaponAtTarget();
+        }
     }
 
     private void ScanForTarget()
@@ -65,16 +75,27 @@ public class DefenseTurret : MonoBehaviour
         //Debug.Log("distance: " + diff + ". AtkRng: " + attackRange);
         if (diff <= attackRange && timeSinceLastShot <= 0)
         {
-            sh.SpikeLoudnessDueToAttack();
-            AudioSource.PlayClipAtPoint(selectedFiringSound, transform.position);
-            selectedFiringSound = SelectSoundFromArray(firingSounds);
+
+            if (isClient && firingSounds.Length > 0)
+            {
+                AudioSource.PlayClipAtPoint(selectedFiringSound, transform.position);
+                selectedFiringSound = SelectSoundFromArray(firingSounds);
+            }
+
             float zAng = Vector3.SignedAngle(Vector2.up, dir, Vector3.forward);
             Quaternion rot = Quaternion.Euler(0, 0, zAng);
             GameObject bullet = Instantiate(weaponPrefab, transform.position + (dir*bulletOffset),rot) as GameObject;
             bullet.GetComponent<Rigidbody2D>().velocity = weaponSpeed * bullet.transform.up;
-            DamageDealer dd = bullet.GetComponent<DamageDealer>();
-            dd.SetDamage(weaponDamage);
-            dd.SetAttackSource(gameObject);
+
+            if (isServer)
+            {
+                sh.SpikeLoudnessDueToAttack();
+                DamageDealer dd = bullet.GetComponent<DamageDealer>();
+                dd.SetDamage(weaponDamage);
+                dd.SetAttackSource(gameObject);
+            }
+            NetworkServer.Spawn(bullet);
+
             Destroy(bullet, weaponLifetime);
             timeSinceLastShot = timeBetweenShots;
         }
