@@ -7,6 +7,7 @@ public class Attack_Basic : Attack
 {
     //init
     Transform weaponSource;
+    StealthHider sh;
 
     //param
     float timeBetweenAttacks = 0.3f;
@@ -23,6 +24,8 @@ public class Attack_Basic : Attack
     {
         base.Start();
         weaponSource = GetComponentInChildren<WeaponSource>().transform;
+        sh = GetComponentInChildren<StealthHider>();
+
 
     }
 
@@ -63,6 +66,9 @@ public class Attack_Basic : Attack
             dd.SetDamage(weaponDamage);
             Destroy(bullet, weaponLifetime);
             timeSinceLastAttack = timeBetweenAttacks;
+
+            sh.SpikeLoudnessDueToAttack();
+            
 
             RpcDisplaySimAttackOnClients();
         }

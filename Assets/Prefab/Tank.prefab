@@ -579,7 +579,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5881673633148322259, guid: d9e6af2ace5f1924e82caafa1f646762, type: 3}
       propertyPath: attackSoundSpike
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881673633148322259, guid: d9e6af2ace5f1924e82caafa1f646762, type: 3}
+      propertyPath: hiderShrinkRate
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5881673633148322260, guid: d9e6af2ace5f1924e82caafa1f646762, type: 3}
       propertyPath: m_Name

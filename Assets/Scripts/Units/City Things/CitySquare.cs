@@ -207,10 +207,13 @@ public class CitySquare : NetworkBehaviour
         if (isServer)
         {
             timeSinceLastHouseCreation += Time.deltaTime;
-            if (hic.Count < maxCitySize && timeSinceLastHouseCreation >= baseTimeBetweenHouseCreations * hic.Count)
+            if (timeSinceLastHouseCreation >= baseTimeBetweenHouseCreations * hic.Count)
             {
-                SpawnHousesWithinCity(1);
                 timeSinceLastHouseCreation = UnityEngine.Random.Range(0, randomTimeBetweenHouseSpawn); ;
+                if (hic.Count < maxCitySize)
+                {
+                    SpawnHousesWithinCity(1);
+                }
             }
         }
 

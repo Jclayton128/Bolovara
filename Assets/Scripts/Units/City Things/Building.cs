@@ -114,7 +114,7 @@ public class Building : NetworkBehaviour
 
     private void OnDestroy()
     {
-        if (isServer)
+        if (isServerOnly)
         {
             DyingActions();
         }
