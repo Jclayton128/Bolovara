@@ -57,9 +57,11 @@ public class CitySquare : NetworkBehaviour
     {
         Grid grid = FindObjectOfType<Grid>();
         float gridUnit = grid.cellSize.x;
+
         for (int i = 0; i < numberOfHouses; i++)
         {
             Vector3 actualPos = Vector3.zero;
+            int attempts = 0;
             do
             {
                 Vector3 gridSnappedPos = Vector3.zero;
@@ -67,8 +69,12 @@ public class CitySquare : NetworkBehaviour
                 Vector3 pos3 = pos;
                 gridSnappedPos = new Vector3(Mathf.Round(pos.x / gridUnit), Mathf.Round(pos.y / gridUnit), 0);
                 Vector3 halfStep = (new Vector3(1, 1, 0)) * gridUnit / 2f;
-                actualPos = transform.position + gridSnappedPos + halfStep;               
-
+                actualPos = transform.position + gridSnappedPos + halfStep;
+                attempts++;
+                if (attempts > 10)
+                {
+                    break;
+                }
             }
             while (!(IsTestLocationValid_NavMesh(actualPos) & IsTestLocationValid_Physics(actualPos)));
 
