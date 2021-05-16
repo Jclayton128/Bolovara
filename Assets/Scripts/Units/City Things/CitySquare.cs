@@ -21,6 +21,7 @@ public class CitySquare : NetworkBehaviour
     int numberOfTurretsToSpawn = 1;
     float timeToCapture = 2f;
     public float baseTimeBetweenHouseCreations;
+    float randomTimeBetweenHouseSpawn = 2f;
     int maxCitySize = 10;
 
     //hood
@@ -43,6 +44,7 @@ public class CitySquare : NetworkBehaviour
         iff.SetIFFAllegiance(IFF.feralIFF);
         SpawnHousesWithinCity(numberOfHousesToSpawn);
         SpawnTurretsWithinCity(numberOfTurretsToSpawn);
+        timeSinceLastHouseCreation = UnityEngine.Random.Range(0, randomTimeBetweenHouseSpawn);
         //ConvertHousesToTurrets();
 
         //SetAllegianceForBuildingsInCity(IFF.feralIFF);
@@ -205,10 +207,10 @@ public class CitySquare : NetworkBehaviour
         if (isServer)
         {
             timeSinceLastHouseCreation += Time.deltaTime;
-            if (timeSinceLastHouseCreation >= baseTimeBetweenHouseCreations * hic.Count && hic.Count < maxCitySize)
+            if (hic.Count < maxCitySize && timeSinceLastHouseCreation >= baseTimeBetweenHouseCreations * hic.Count)
             {
                 SpawnHousesWithinCity(1);
-                timeSinceLastHouseCreation = 0;
+                timeSinceLastHouseCreation = UnityEngine.Random.Range(0, randomTimeBetweenHouseSpawn); ;
             }
         }
 
