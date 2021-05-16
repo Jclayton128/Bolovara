@@ -17,17 +17,19 @@ public class CitySquare : NetworkBehaviour
 
     //param
     public float CityRadius { get; protected set; } = 4f;
-    int numberOfHousesToSpawn = 6;
+    int numberOfHousesToSpawn = 1;
     int numberOfTurretsToSpawn = 1;
     float timeToCapture = 2f;
+    public float baseTimeBetweenHouseCreations;
+    int maxCitySize = 10;
 
     //hood
     public string cityName { get; protected set; } //TODO sync this.
 
-    public SyncList<Building> hic = new SyncList<Building>();
-    public SyncList<Building> tic = new SyncList<Building>();
-    public SyncList<uint> DraftCount = new SyncList<uint>();
-    public float timeSpentCapturing = 0;
+    SyncList<Building> hic = new SyncList<Building>();
+    SyncList<Building> tic = new SyncList<Building>();
+    float timeSpentCapturing = 0;
+    float timeSinceLastHouseCreation = 0;
 
     public override void OnStartServer()
     {
@@ -36,11 +38,12 @@ public class CitySquare : NetworkBehaviour
         am = FindObjectOfType<AllegianceManager>();
         sr = GetComponent<SpriteRenderer>();
         SelectCityName();
+        iff.SetIFFAllegiance(IFF.feralIFF);
         SpawnHousesWithinCity(numberOfHousesToSpawn);
         SpawnTurretsWithinCity(numberOfTurretsToSpawn);
         //ConvertHousesToTurrets();
-        iff.SetIFFAllegiance(IFF.feralIFF);
-        SetAllegianceForBuildingsInCity(IFF.feralIFF);
+
+        //SetAllegianceForBuildingsInCity(IFF.feralIFF);
     }
 
     #region creation
@@ -72,11 +75,11 @@ public class CitySquare : NetworkBehaviour
             GameObject newHouse = Instantiate(housePrefab, actualPos, housePrefab.transform.rotation) as GameObject;
             Building house = newHouse.GetComponent<Building>();
             house.am = am;
+            house.SetHouseIFFAllegiance(iff.GetIFFAllegiance());
             //house.InitializeBuilding();
             house.SetOwningCity(this);
             NetworkServer.Spawn(newHouse);
             hic.Add(house);
-            DraftCount.Add(house.netId);
         }
     }
 
@@ -103,6 +106,7 @@ public class CitySquare : NetworkBehaviour
             Building turret = newTurret.GetComponent<Building>();
 
             turret.am = am;
+            turret.SetHouseIFFAllegiance(iff.GetIFFAllegiance());
             //house.InitializeBuilding();
             turret.SetOwningCity(this);
             NetworkServer.Spawn(newTurret);
@@ -188,7 +192,18 @@ public class CitySquare : NetworkBehaviour
     private void Update()
     {
         timeSpentCapturing -= (Time.deltaTime / 2f);  //Constant drain on capture time.
-        timeSpentCapturing = Mathf.Clamp(timeSpentCapturing, 0, timeToCapture+1);
+        timeSpentCapturing = Mathf.Clamp(timeSpentCapturing, 0, timeToCapture + 1);
+
+        if (isServer)
+        {
+            timeSinceLastHouseCreation += Time.deltaTime;
+            if (timeSinceLastHouseCreation >= baseTimeBetweenHouseCreations * hic.Count && hic.Count < maxCitySize)
+            {
+                SpawnHousesWithinCity(1);
+                timeSinceLastHouseCreation = 0;
+            }
+        }
+
     }
 
     public void BuildCaptureTime(float time)
@@ -211,6 +226,8 @@ public class CitySquare : NetworkBehaviour
     }
 
     #endregion
+
+
     public void RemoveBuildingFromList(Building deadThing)
     {
         hic.Remove(deadThing);
