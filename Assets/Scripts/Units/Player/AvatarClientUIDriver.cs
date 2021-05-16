@@ -33,6 +33,7 @@ public class AvatarClientUIDriver : NetworkBehaviour
     string closestCity;
     Color compassBGColor;
 
+    CitySquare prevCS;
     CitySquare nearestCS;
     float distToNearestCS;
     float initialScale;
@@ -68,14 +69,18 @@ public class AvatarClientUIDriver : NetworkBehaviour
     {
         if (isClient)
         {
+            prevCS = nearestCS;
             nearestCS = cm.FindNearestCitySquare(transform);
 
             OrientCompassTowardsNearestCity();
             ScaleCompassWithDistanceToNearestCity();
             ChangeCompassBGWithIFFStatusOfNearestCity();
-            UpdateNameBarWithClosestCity();
 
-            
+            if (nearestCS == prevCS)
+            {
+                return;
+            }
+            UpdateNameBarWithClosestCity();
         }
     }
 
@@ -97,7 +102,7 @@ public class AvatarClientUIDriver : NetworkBehaviour
     private void ChangeCompassBGWithIFFStatusOfNearestCity()
     {
         int nearestIFF = cm.FindCityIFF(nearestCS);
-        if (nearestCS.GetTimeSpentCapturing() > 0)
+        if (nearestCS.GetTimeSpentCapturing() > 0.1f)
         {
             compassBG.color = iffCapturing;
             return;
@@ -122,7 +127,7 @@ public class AvatarClientUIDriver : NetworkBehaviour
 
     private void UpdateNameBarWithClosestCity()
     {
-        cityNameTMP.text = nearestCS.cityName;
+        cityNameTMP.text = nearestCS.GetCityName();
     }
 
 }

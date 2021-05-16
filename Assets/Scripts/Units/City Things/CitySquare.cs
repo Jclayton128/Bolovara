@@ -24,10 +24,12 @@ public class CitySquare : NetworkBehaviour
     int maxCitySize = 10;
 
     //hood
-    public string cityName { get; protected set; } //TODO sync this.
+    [SyncVar]
+    string cityName;
 
     SyncList<Building> hic = new SyncList<Building>();
     SyncList<Building> tic = new SyncList<Building>();
+    [SyncVar]
     float timeSpentCapturing = 0;
     float timeSinceLastHouseCreation = 0;
 
@@ -233,7 +235,10 @@ public class CitySquare : NetworkBehaviour
 
     #endregion
 
-
+    public string GetCityName()
+    {
+        return cityName;
+    }
     public void RemoveBuildingFromList(Building deadThing)
     {
         hic.Remove(deadThing);
