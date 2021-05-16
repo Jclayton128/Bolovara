@@ -134,9 +134,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 1459045170686098954, guid: c9f6d9282416a324f8615b673cb0126e, type: 3}
   firingSounds: []
   timeBetweenShots: 0.5
-  weaponSpeed: 10
+  weaponSpeed: 6
   weaponLifetime: 0.7
-  weaponDamage: 0.5
+  weaponDamage: 0.3
   searchRange: 10
   target: {fileID: 0}
 --- !u!114 &8342953784758367757

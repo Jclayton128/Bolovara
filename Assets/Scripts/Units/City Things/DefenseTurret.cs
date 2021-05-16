@@ -19,7 +19,7 @@ public class DefenseTurret : NetworkBehaviour
     public float weaponLifetime; //.45f
     public float weaponDamage;
     public float searchRange = 10f;
-    float bulletOffset = 0.1f;
+    float bulletOffset = 0.25f;
     float timeBetweenScans = 0.2f;
 
     //hood
@@ -87,12 +87,18 @@ public class DefenseTurret : NetworkBehaviour
             GameObject bullet = Instantiate(weaponPrefab, transform.position + (dir*bulletOffset),rot) as GameObject;
             bullet.GetComponent<Rigidbody2D>().velocity = weaponSpeed * bullet.transform.up;
 
+            DamageDealer dd = bullet.GetComponent<DamageDealer>();
             if (isServer)
             {
                 sh.SpikeLoudnessDueToAttack();
-                DamageDealer dd = bullet.GetComponent<DamageDealer>();
+
                 dd.SetDamage(weaponDamage);
                 dd.SetAttackSource(gameObject);
+            }
+
+            if (isClient)
+            {
+                dd.SetDamage(0);
             }
             NetworkServer.Spawn(bullet);
 
