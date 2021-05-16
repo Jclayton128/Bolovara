@@ -142,7 +142,7 @@ public abstract class ControlSource : NetworkBehaviour
 
     private int GetCurrentTerrainType()
     {
-        Debug.Log("Trying to update terrain type");
+        //Debug.Log("Trying to update terrain type");
         NavMeshHit hit;
         NavMesh.SamplePosition(transform.position, out hit, 0.1f, NavMesh.AllAreas);
         int index = IndexFromMask(hit.mask);

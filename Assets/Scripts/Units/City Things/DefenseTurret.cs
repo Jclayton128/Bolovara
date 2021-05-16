@@ -96,7 +96,7 @@ public class DefenseTurret : NetworkBehaviour
                 dd.SetAttackSource(gameObject);
             }
 
-            if (isClient)
+            if (isClientOnly)
             {
                 dd.SetDamage(0);
             }

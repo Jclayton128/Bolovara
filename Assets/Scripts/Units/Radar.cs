@@ -33,7 +33,6 @@ public class Radar : NetworkBehaviour
             playerAtThisComputer = ClientInstance.ReturnClientInstance();
             uim = FindObjectOfType<UIManager>();
             rs = uim.GetRadarScreen(playerAtThisComputer);
-
         }
     }   
 
@@ -88,7 +87,7 @@ public class Radar : NetworkBehaviour
     [Server]
     private void GetTargets()
     {
-        targets = ut.FindUnitsWithinSearchRange(transform.gameObject, radarRange, false);  //TODO look for defense turrets too
+        targets = ut.FindUnitsWithinSearchRange(transform.gameObject, radarRange, true);  //TODO look for defense turrets too
     }
     private void IncreaseIntensityFromNoiseInEachSector()
     {

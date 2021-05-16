@@ -12,7 +12,7 @@ public class DamageDealer : MonoBehaviour
 
     //hood
     public bool Simulated { get; set; } = false;
-    float damage;
+    public float damage;
     float knockback;
     GameObject attackSource = null;
 

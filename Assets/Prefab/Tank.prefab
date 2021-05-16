@@ -368,10 +368,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  cityCaptureSlider: {fileID: 0}
-  cityNameTMP: {fileID: 0}
-  time: 0
-  maxTime: 0
 --- !u!1 &5187904961101324016
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +576,10 @@ PrefabInstance:
     - target: {fileID: 5881673633148322258, guid: d9e6af2ace5f1924e82caafa1f646762, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881673633148322259, guid: d9e6af2ace5f1924e82caafa1f646762, type: 3}
+      propertyPath: attackSoundSpike
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5881673633148322260, guid: d9e6af2ace5f1924e82caafa1f646762, type: 3}
       propertyPath: m_Name

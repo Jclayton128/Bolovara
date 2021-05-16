@@ -22,7 +22,7 @@ public class StealthHider : MonoBehaviour
     public float hiderRadius_Base;
     public float hiderGrowthRate; //per second;
     public float hiderShrinkRate; //per second;
-    public float attackModifier; //attacking multiplies the size of hiderRadius_Base, 
+    public float attackSoundSpike; // This auto-forces the stealth hider to this size;
     public bool isBuilding = false;
 
     float playerUnitFadeAmount = 0.5f;
@@ -44,7 +44,11 @@ public class StealthHider : MonoBehaviour
         cs = transform.root.GetComponentInChildren<ControlSource>();
         //iff = transform.root.GetComponentInChildren<IFF>();
         //am = FindObjectOfType<AllegianceManager>();
-        isAvatarOfLocalPlayer = cs.CheckIfAvatarOfLocalPlayer();
+        if (!isBuilding)
+        {
+            isAvatarOfLocalPlayer = cs.CheckIfAvatarOfLocalPlayer();
+        }
+
         if (!isAvatarOfLocalPlayer)
         {
             FadeOrTurnInvisible();
@@ -112,7 +116,8 @@ public class StealthHider : MonoBehaviour
 
     public void SpikeLoudnessDueToAttack()
     {
-        hiderColl.radius = attackModifier * hiderRadius_Base;
+        Debug.Log("spike loudness due to attack");
+        hiderColl.radius = attackSoundSpike;
     }
     private void AdjustHiderRadius()
     {
@@ -129,11 +134,11 @@ public class StealthHider : MonoBehaviour
         }
         if (!isBuilding)
         {
-            hiderColl.radius = Mathf.Clamp(hiderColl.radius, hiderRadius_Base / 4, hiderRadius_Base * attackModifier * hiderRadius_TerrainModifier);
+            hiderColl.radius = Mathf.Clamp(hiderColl.radius, hiderRadius_Base / 4, hiderRadius_Base * attackSoundSpike * hiderRadius_TerrainModifier);
         }
         if (isBuilding)
         {
-            hiderColl.radius = Mathf.Clamp(hiderColl.radius, 0, attackModifier * hiderRadius_Base);
+            hiderColl.radius = Mathf.Clamp(hiderColl.radius, 0, attackSoundSpike * hiderRadius_Base);
         }
 
     }
