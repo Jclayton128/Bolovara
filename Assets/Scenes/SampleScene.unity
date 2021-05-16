@@ -24686,6 +24686,8 @@ MonoBehaviour:
   cityNameTMP: {fileID: 360487849}
   radarScreen: {fileID: 619505272}
   followMeText: {fileID: 0}
+  compassBackground: {fileID: 2071093397}
+  compassNeedle: {fileID: 395657009}
 --- !u!1 &989318382
 GameObject:
   m_ObjectHideFlags: 0
@@ -48880,9 +48882,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 265f3cc50f9068e46a893754bcf54393, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bbd5d77aa1be90440babfd267fbaf6c6, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

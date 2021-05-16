@@ -178,5 +178,11 @@ public class CityManager : MonoBehaviour
         return foundSomething;
     }
 
+    public int FindCityIFF(CitySquare cs)
+    {
+        int iff = cs.GetComponent<IFF>().GetIFFAllegiance();
+        return iff;
+    } 
+
 
 }

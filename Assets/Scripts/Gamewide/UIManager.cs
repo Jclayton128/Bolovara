@@ -25,6 +25,8 @@ public class UIManager : NetworkBehaviour
     [SerializeField] TextMeshProUGUI cityNameTMP = null;
     [SerializeField] RadarScreen radarScreen = null;
     [SerializeField] TextMeshProUGUI followMeText = null;
+    [SerializeField] Image compassBackground = null;
+    [SerializeField] Image compassNeedle = null;
 
 
 
@@ -198,6 +200,22 @@ public class UIManager : NetworkBehaviour
         {
             //Debug.Log("Asking GO is not the local player! No UI for you!");
             return null;
+        }
+    }
+
+    public void GetCompassComponents(ClientInstance askingCI, out Image compBG, out Image compNeedle)
+    {
+
+        if (askingCI == playerAtThisComputer)
+        {
+            compBG = compassBackground;
+            compNeedle = compassNeedle;
+        }
+        else
+        {
+            //Debug.Log("Asking GO is not the local player! No UI for you!");
+            compBG = null;
+            compNeedle = null;
         }
     }
 
