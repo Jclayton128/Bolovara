@@ -58,9 +58,9 @@ public class PlayerInput : ControlSource
     // Update is called once per frame
     protected override void Update()
     {
+        base.Update();
         if (hasAuthority)
         {
-            base.Update();
             HandleKeyboardInput();
             HandleMouseInput();
             CmdSendServerSideDesiredInput(desHoriz, desVert, desSpeedSetting, desAimDir);

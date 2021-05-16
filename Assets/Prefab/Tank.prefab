@@ -39,7 +39,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4164942101872321102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.34, y: -0.61, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6577860182831269234}
@@ -337,6 +337,7 @@ MonoBehaviour:
   radarRange: 20
   signalFudge: 0.1
   maxRandomNoise: 0.1
+  hasAHumanOwner: 0
 --- !u!114 &1200691773861183226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e3b4e4466d9f549bf80b5dddb85513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   flagSR: {fileID: 0}
   iffAllegiance: 0
 --- !u!114 &-3880857150185815367
