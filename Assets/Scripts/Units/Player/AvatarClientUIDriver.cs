@@ -33,16 +33,15 @@ public class AvatarClientUIDriver : NetworkBehaviour
     string closestCity;
     Color compassBGColor;
 
-    CitySquare prevCS;
     CitySquare nearestCS;
     float distToNearestCS;
     float initialScale;
 
     int myIFFAllegiance; // OK to capture this because it won't change for the player.
 
-    public override void OnStartClient()
+    //public override void OnStartClient()
+    private void Start()
     {
-        base.OnStartClient();
         ClientInstance ci = ClientInstance.ReturnClientInstance();
         UIManager uim = FindObjectOfType<UIManager>();
         cityCaptureSlider = uim.GetCityCaptureSlider(ci);
@@ -67,19 +66,19 @@ public class AvatarClientUIDriver : NetworkBehaviour
 
     private void Update()
     {
-        if (isClient)
+        if (hasAuthority)
         {
-            prevCS = nearestCS;
-            nearestCS = cm.FindNearestCitySquare(transform);
+            cityNameTMP.text = "1";
+            if (cm == null)
+            {
+                cm = FindObjectOfType<CityManager>();
+            }
+            cityNameTMP.text = cm.name;
+            nearestCS = cm.FindNearestCitySquare(gameObject.transform);
 
             OrientCompassTowardsNearestCity();
             ScaleCompassWithDistanceToNearestCity();
             ChangeCompassBGWithIFFStatusOfNearestCity();
-
-            if (nearestCS == prevCS)
-            {
-                return;
-            }
             UpdateNameBarWithClosestCity();
         }
     }

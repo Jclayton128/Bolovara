@@ -18,8 +18,11 @@ public class HouseHolder : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ClientInstance ci = ClientInstance.ReturnClientInstance();
-        houseCounter = FindObjectOfType<UIManager>().GetHouseCounter(ci);
+        if (isClient && hasAuthority)
+        {
+            ClientInstance ci = ClientInstance.ReturnClientInstance();
+            houseCounter = FindObjectOfType<UIManager>().GetHouseCounter(ci);
+        }
     }
      
     public void DecrementHouseCount()

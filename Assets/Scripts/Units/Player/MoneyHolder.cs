@@ -18,9 +18,11 @@ public class MoneyHolder : NetworkBehaviour
     int money = 0;
     void Start()
     {
-        ClientInstance ci = ClientInstance.ReturnClientInstance();
-        moneyBar = FindObjectOfType<UIManager>().GetMoneyCounter(ci);
-
+        if (isClient && hasAuthority)
+        {
+            ClientInstance ci = ClientInstance.ReturnClientInstance();
+            moneyBar = FindObjectOfType<UIManager>().GetMoneyCounter(ci);
+        }
     }
 
     public int GetMoneyAmount()

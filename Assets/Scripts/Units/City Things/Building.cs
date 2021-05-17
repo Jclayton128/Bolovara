@@ -112,11 +112,4 @@ public class Building : NetworkBehaviour
         ut.RemoveUnitFromTargetableList(gameObject);
     }
 
-    private void OnDestroy()
-    {
-        if (isServerOnly)
-        {
-            DyingActions();
-        }
-    }
 }
