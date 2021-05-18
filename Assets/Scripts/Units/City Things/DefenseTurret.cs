@@ -19,7 +19,7 @@ public class DefenseTurret : NetworkBehaviour
     public float weaponLifetime; //.45f
     public float weaponDamage;
     public float searchRange = 10f;
-    float bulletOffset = 0.25f;
+    float bulletOffset = 0.1f;  //.4 does it
     float timeBetweenScans = 0.2f;
 
     //hood
@@ -75,7 +75,6 @@ public class DefenseTurret : NetworkBehaviour
         //Debug.Log("distance: " + diff + ". AtkRng: " + attackRange);
         if (diff <= attackRange && timeSinceLastShot <= 0)
         {
-
             if (isClient && firingSounds.Length > 0)
             {
                 AudioSource.PlayClipAtPoint(selectedFiringSound, transform.position);
@@ -88,23 +87,28 @@ public class DefenseTurret : NetworkBehaviour
             bullet.GetComponent<Rigidbody2D>().velocity = weaponSpeed * bullet.transform.up;
 
             DamageDealer dd = bullet.GetComponent<DamageDealer>();
-            if (isServer)
-            {
-                sh.SpikeLoudnessDueToAttack();
 
-                dd.SetDamage(weaponDamage);
-                dd.SetAttackSource(gameObject);
-            }
-
-            if (isClientOnly)
-            {
-                dd.SetDamage(0);
-            }
-            NetworkServer.Spawn(bullet);
+            sh.SpikeLoudnessDueToAttack();
+            dd.SetDamage(weaponDamage);
+            dd.SetAttackSource(gameObject);
+            RpcDisplaySimAttackOnClients(transform.position + (dir * bulletOffset), rot);
+ 
 
             Destroy(bullet, weaponLifetime);
             timeSinceLastShot = timeBetweenShots;
         }
+    }
+
+    [ClientRpc]
+    private void RpcDisplaySimAttackOnClients(Vector3 pos, Quaternion rot)
+    {
+        GameObject bullet = Instantiate(weaponPrefab, pos, rot) as GameObject;
+        bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * weaponSpeed;
+        DamageDealer dd = bullet.GetComponent<DamageDealer>();
+        dd.Simulated = true;
+        dd.SetDamage(0);
+        dd.SetAttackSource(gameObject);
+        Destroy(bullet, weaponLifetime);
     }
 
     private AudioClip SelectSoundFromArray(AudioClip[] audioArray)

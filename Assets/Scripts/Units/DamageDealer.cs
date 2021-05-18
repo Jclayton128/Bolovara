@@ -52,12 +52,8 @@ public class DamageDealer : MonoBehaviour
     public void HandleImpactWithTarget(GameObject targetGO)
     {
         if (!weaponImpactAnimationPrefab) { return; }
-
-        GameObject animation = Instantiate(weaponImpactAnimationPrefab, transform.position, transform.rotation) as GameObject;
-        //animation.transform.parent = targetGO.transform;
-        Animator anim = animation.GetComponent<Animator>();
-        Destroy(animation, anim.GetCurrentAnimatorStateInfo(0).length);
-        Destroy(gameObject);
+        if (targetGO == attackSource) { return; }
+        CreateImpactAnimoid();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,13 +61,15 @@ public class DamageDealer : MonoBehaviour
         if (!weaponImpactAnimationPrefab) { return; }
         if (collision.gameObject == attackSource) { return; }
         if (!collision.enabled) { return; }
+        Debug.Log($" {collision.gameObject} just hit {gameObject}");
+        CreateImpactAnimoid();
+    }
 
+    private void CreateImpactAnimoid()
+    {
         GameObject animation = Instantiate(weaponImpactAnimationPrefab, transform.position, transform.rotation) as GameObject;
-        animation.transform.parent = collision.transform;
         Animator anim = animation.GetComponent<Animator>();
         Destroy(animation, anim.GetCurrentAnimatorStateInfo(0).length);
         Destroy(gameObject);
     }
-
-
 }

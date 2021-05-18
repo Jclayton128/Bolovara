@@ -114,8 +114,21 @@ public class Health : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject otherGO = other.gameObject;
+        DamageDealer dd;
+        if (otherGO.TryGetComponent<DamageDealer>(out dd))
+        {
+            if(dd.GetAttackSource() == gameObject)
+            {
+                return;
+            }
+            else
+            {
+                HandleDamage(otherGO);
+            }
+
+        }
        
-        HandleDamage(otherGO);
+
     }
 
     private void HandleDamage(GameObject other)
