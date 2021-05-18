@@ -65,10 +65,10 @@ public class Radar : NetworkBehaviour
                 InjectRandomNoise();
                 InjectRandomNoise();  // Two rounds of noise inject
                 ClampIntensityLevelFloorToSelfNoiseInEachSector();
-                if (!isServerOnly)
-                {
+                //if (!isServerOnly)
+                //{
                     TargetPushSectorIntensityToRadarScreen(); //TODO don't let this get called on AI-controlled tanks.
-                }
+                //}
             
                 timeSinceLastScan = 0;
             }

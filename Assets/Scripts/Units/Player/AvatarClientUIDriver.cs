@@ -42,14 +42,17 @@ public class AvatarClientUIDriver : NetworkBehaviour
     //public override void OnStartClient()
     private void Start()
     {
-        ClientInstance ci = ClientInstance.ReturnClientInstance();
-        UIManager uim = FindObjectOfType<UIManager>();
-        cityCaptureSlider = uim.GetCityCaptureSlider(ci);
-        cityNameTMP = uim.GetCityNameTMP(ci);  //TODO implement city names.
-        uim.GetCompassComponents(ci, out compassBG, out compassNeedle);
-        cm = FindObjectOfType<CityManager>();
-        initialScale = compassNeedle.transform.localScale.x;
-        myIFFAllegiance = GetComponent<IFF>().GetIFFAllegiance();
+        if (hasAuthority)
+        {
+            ClientInstance ci = ClientInstance.ReturnClientInstance();
+            UIManager uim = FindObjectOfType<UIManager>();
+            cityCaptureSlider = uim.GetCityCaptureSlider(ci);
+            cityNameTMP = uim.GetCityNameTMP(ci);  //TODO implement city names.
+            uim.GetCompassComponents(ci, out compassBG, out compassNeedle);
+            cm = FindObjectOfType<CityManager>();
+            initialScale = compassNeedle.transform.localScale.x;
+            myIFFAllegiance = GetComponent<IFF>().GetIFFAllegiance();
+        }
     }
 
     public void UpdateTimes(float newTime, float newMaxTime)
