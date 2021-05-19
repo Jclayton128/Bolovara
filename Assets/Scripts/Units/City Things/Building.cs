@@ -73,7 +73,7 @@ public class Building : NetworkBehaviour
         if (timeSinceLastMoneyDrop <= 0)
         {
             FindCurrentOwner();
-            owner.GetComponent<MoneyHolder>().AddMoney(amountOfMoneyOnEachDrop);
+            owner.GetComponent<MoneyHolder>().ModifyMoney(amountOfMoneyOnEachDrop);
             timeSinceLastMoneyDrop = timeBetweenMoneyDrops;
         }
     }

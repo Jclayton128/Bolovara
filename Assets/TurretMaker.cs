@@ -30,6 +30,7 @@ public class TurretMaker : NetworkBehaviour
     int currentSelectionIndex = 0;
     void Start()
     {
+
         if (hasAuthority)
         {
             uim = FindObjectOfType<UIManager>();
@@ -38,10 +39,10 @@ public class TurretMaker : NetworkBehaviour
             tpd.SetTurretMaker(this);
             SetOptionSpritesOnTPD();
             SetOptionCostsOnTPD();
-            myIFF = GetComponent<FactionLeader>().GetMasterIFFAllegiance();
-            mh = GetComponent<MoneyHolder>();
-            avatarCT = ci.currentAvatar.GetComponentInChildren<CaptureTool>();
+
         }
+        myIFF = GetComponent<FactionLeader>().GetMasterIFFAllegiance();
+        mh = GetComponent<MoneyHolder>();
     }
 
     private void SetOptionSpritesOnTPD()
@@ -63,17 +64,24 @@ public class TurretMaker : NetworkBehaviour
 
     public void PrepareOption(int i)
     {
-        //Validate here that the player has enough money for the desired turret, or play a "negative" sound.
-
         ClearCurrentSelection();
         currentSelectionIndex = i;
-        GameObject dummy = Instantiate(dummyPrefab, mousePos, Quaternion.identity) as GameObject;
-        Sprite dummySprite = turretOptionPrefabs[i].GetComponent<SpriteRenderer>().sprite;
-        dummySelected = dummy;
-        dummySR = dummy.GetComponent<SpriteRenderer>();
-        dummySR.sprite = dummySprite;
-        dummySR.color = new Color(1, 0.3f, 0.3f, 0.5f);
 
+        if (mh.CheckForSufficientFunds(turretOptionCosts[i]) == false)
+        {
+            Debug.Log("You can't afford this!");
+            //TODO play a negative sound.
+        }
+        else
+        {
+
+            GameObject dummy = Instantiate(dummyPrefab, mousePos, Quaternion.identity) as GameObject;
+            Sprite dummySprite = turretOptionPrefabs[i].GetComponent<SpriteRenderer>().sprite;
+            dummySelected = dummy;
+            dummySR = dummy.GetComponent<SpriteRenderer>();
+            dummySR.sprite = dummySprite;
+            dummySR.color = new Color(1, 0.3f, 0.3f, 0.5f);
+        }
     }
 
     public void ClearCurrentSelection()
@@ -103,18 +111,7 @@ public class TurretMaker : NetworkBehaviour
             {
                 if (nearestHouse)
                 {
-                    //Decrement Money
-
-                    GameObject newTurret = 
-                        Instantiate(turretOptionPrefabs[currentSelectionIndex],
-                        nearestHouse.transform.position, Quaternion.identity) as GameObject;
-                    newTurret.GetComponent<IFF>().SetIFFAllegiance(myIFF);
-
-                    nearestHouse.GetComponent<Building>().DestroyDueToTurretUpgrade();
-
-                    nearestHouse = null;
-
-                    ClearCurrentSelection();
+                    CmdRequestTurretUpgrade(currentSelectionIndex, nearestHouse.transform.position, myIFF, nearestHouse);
                 }
             }
         }
@@ -137,9 +134,32 @@ public class TurretMaker : NetworkBehaviour
                 dummySelected.transform.position = mousePos;
                 dummySR.color = invalidColor;
             }
-
         }
     }
+
+    [Command]
+    private void CmdRequestTurretUpgrade(int index, Vector3 position, int iff, GameObject sacrificialHouse)
+    {
+        int cost = turretOptionCosts[index];
+        if (mh.CheckForSufficientFunds(cost) == false) { return; }  //Server check for sufficient funds
+        if (sacrificialHouse.GetComponent<IFF>().GetIFFAllegiance() != iff) { return; } // Server check that the house is allied
+        mh.ModifyMoney(-1 * turretOptionCosts[currentSelectionIndex]);
+
+        ClearCurrentSelection();
+        RpcUpgradeHouseIntoTurret(index, position, iff);
+        //nearestHouse.GetComponent<Building>().DyingActions();  //The server doesn't have a working allegiance manager, I guess? This line makes the server sad.
+        nearestHouse = null;
+        NetworkServer.Destroy(nearestHouse);
+
+    }
+
+    [ClientRpc]
+    public void RpcUpgradeHouseIntoTurret(int turretType, Vector3 pos, int newIFF)
+    {
+        GameObject newTurret = Instantiate(turretOptionPrefabs[turretType], pos, Quaternion.identity) as GameObject;
+        newTurret.GetComponent<IFF>().SetIFFAllegiance(newIFF);
+    }
+
 
     private GameObject CheckForNearbyAlliedHouse(Vector3 mousePos)
     {

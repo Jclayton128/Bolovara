@@ -30,7 +30,7 @@ public class MoneyHolder : NetworkBehaviour
         return money;
     }
 
-    public void AddMoney(int amount)
+    public void ModifyMoney(int amount)
     {
         if (isServer)
         {
@@ -42,5 +42,17 @@ public class MoneyHolder : NetworkBehaviour
     {
         if (!moneyBar) { return; }
         moneyBar.text = "$ " + money.ToString();
+    }
+
+    public bool CheckForSufficientFunds(int amount)
+    {
+        if (amount > money)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
