@@ -27,6 +27,7 @@ public class UIManager : NetworkBehaviour
     [SerializeField] TextMeshProUGUI followMeText = null;
     [SerializeField] Image compassBackground = null;
     [SerializeField] Image compassNeedle = null;
+    [SerializeField] TurretPanelDriver turretPanel = null;
 
 
 
@@ -216,6 +217,19 @@ public class UIManager : NetworkBehaviour
             //Debug.Log("Asking GO is not the local player! No UI for you!");
             compBG = null;
             compNeedle = null;
+        }
+    }
+
+    public TurretPanelDriver GetTPD(ClientInstance askingCI)
+    {
+
+        if (askingCI == playerAtThisComputer)
+        {
+            return turretPanel;
+        }
+        else
+        {
+            return null;
         }
     }
 

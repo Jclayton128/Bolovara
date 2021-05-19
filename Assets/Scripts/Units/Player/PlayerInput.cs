@@ -15,6 +15,7 @@ public class PlayerInput : ControlSource
     Image flagImage;
     AllegianceManager am;
     IFF iff;
+    TurretPanelDriver tpd;
 
     //param
 
@@ -45,7 +46,7 @@ public class PlayerInput : ControlSource
             uim = FindObjectOfType<UIManager>();
             shiftKnob = uim.GetShiftKnob(playerAtThisComputer);
             uim.GetShiftPositions(playerAtThisComputer, out gearShiftPositions[0], out gearShiftPositions[1], out gearShiftPositions[2]);
-
+            tpd = uim.GetTPD(playerAtThisComputer);
             iff = GetComponent<IFF>();
             int myIFF = playerAtThisComputer.GetComponent<FactionLeader>().GetMasterIFFAllegiance();
             iff.SetIFFAllegiance(myIFF);
@@ -100,6 +101,10 @@ public class PlayerInput : ControlSource
         desHoriz = Input.GetAxis("Horizontal");
         desVert = Input.GetAxis("Vertical");
         HandleGearShifting();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            tpd.TogglePanelState();
+        }
     }
     private void HandleGearShifting()
     {
