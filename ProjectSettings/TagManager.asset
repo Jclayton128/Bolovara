@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Turret
   - NavMeshBuildings
+  - House
   layers:
   - Default
   - TransparentFX

@@ -112,4 +112,13 @@ public class Building : NetworkBehaviour
         ut.RemoveUnitFromTargetableList(gameObject);
     }
 
+    public void DestroyDueToTurretUpgrade()
+    {
+        FindCurrentOwner();
+        owner.GetComponent<HouseHolder>().DecrementHouseCount();
+        cs.RemoveBuildingFromList(this);
+        ut.RemoveUnitFromTargetableList(gameObject);
+        Destroy(gameObject);
+    }
+
 }

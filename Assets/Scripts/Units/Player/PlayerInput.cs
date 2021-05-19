@@ -16,6 +16,7 @@ public class PlayerInput : ControlSource
     AllegianceManager am;
     IFF iff;
     TurretPanelDriver tpd;
+    TurretMaker tm;
 
     //param
 
@@ -51,7 +52,7 @@ public class PlayerInput : ControlSource
             int myIFF = playerAtThisComputer.GetComponent<FactionLeader>().GetMasterIFFAllegiance();
             iff.SetIFFAllegiance(myIFF);
             flagImage = uim.GetFlagUIElement(playerAtThisComputer);
-            flagImage.sprite = am.GetFlagOfAllegiance(myIFF);                                   
+            flagImage.sprite = am.GetFlagOfAllegiance(myIFF);           
         }
     }
 
@@ -70,10 +71,15 @@ public class PlayerInput : ControlSource
 
     private void HandleMouseInput()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) )
         {
             LMBdown = true;
-            attack.CmdRequestAttackCommence();
+            if (attack.GetBlockedByUIStatus() == false)
+            {
+                attack.CmdRequestAttackCommence();
+            }
+
+
         }
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
