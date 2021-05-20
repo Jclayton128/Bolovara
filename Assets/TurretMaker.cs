@@ -142,14 +142,16 @@ public class TurretMaker : NetworkBehaviour
 
         GameObject newTurret = Instantiate(turretOptionPrefabs[index], position, Quaternion.identity) as GameObject;
         newTurret.GetComponent<IFF>().SetIFFAllegiance(iff);
+        CitySquare newCS = sacrificialHouse.GetComponent<Building>().GetOwningCitySquare();
+        Building newTurretBuilding = newTurret.GetComponent<Building>();
+        newTurretBuilding.SetOwningCity(newCS);
+        newCS.AddTurretToList(newTurretBuilding);
 
         ClearCurrentSelection();
-        RpcUpgradeHouseIntoTurret(index, position, iff);
+        NetworkServer.Spawn(newTurret);
+        //RpcUpgradeHouseIntoTurret(index, position, iff);
 
-        sacrificialHouse.GetComponent<Building>().FindCurrentOwner();
-        sacrificialHouse.GetComponent<Building>().owner.GetComponent<HouseHolder>().DecrementHouseCount();
-
-        //nearestHouse.GetComponent<Building>().DyingActions();  //The server doesn't have a working allegiance manager, I guess? This line makes the server sad.
+        sacrificialHouse.GetComponent<Building>().DyingActions();  //The server doesn't have a working allegiance manager, I guess? This line makes the server sad.
         NetworkServer.Destroy(sacrificialHouse);
         nearestHouse = null;
         ClearCurrentSelection();

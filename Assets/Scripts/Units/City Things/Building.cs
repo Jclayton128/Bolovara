@@ -20,7 +20,7 @@ public class Building : NetworkBehaviour
     int amountOfMoneyOnEachDrop = 1;
 
     //hood
-    public GameObject owner;
+    [SerializeField] GameObject owner;
     float timeSinceLastMoneyDrop;
 
 
@@ -65,6 +65,11 @@ public class Building : NetworkBehaviour
         }
     }
 
+    public CitySquare GetOwningCitySquare()
+    {
+        return cs;
+    }
+
     private void GenerateMoneyForOwner()
     {
         timeSinceLastMoneyDrop -= Time.deltaTime;
@@ -101,15 +106,18 @@ public class Building : NetworkBehaviour
 
     public void DyingActions()
     {
-        if (isServer == false) { return; }
+        if (isClient) { return; }
         if (!cs) { return; }
 
         if (!GetComponent<DefenseTurret>())
         {
             FindCurrentOwner();
-            owner.GetComponent<HouseHolder>().DecrementHouseCount();
+            if (owner)
+            {
+                owner.GetComponent<HouseHolder>().DecrementHouseCount();
+            }
         }
-        cs.RemoveBuildingFromList(this);
+        cs.RemoveBuildingFromLists(this);
     }
 
   }

@@ -194,6 +194,11 @@ public class CitySquare : NetworkBehaviour
         }
     }
 
+    public void AddTurretToList(Building newTurret)
+    {
+        tic.Add(newTurret);
+    }
+
 
     #endregion
 
@@ -246,7 +251,7 @@ public class CitySquare : NetworkBehaviour
     {
         return cityName;
     }
-    public void RemoveBuildingFromList(Building deadThing)
+    public void RemoveBuildingFromLists(Building deadThing)
     {
         hic.Remove(deadThing);
         tic.Remove(deadThing);

@@ -1,4 +1,5 @@
 ﻿using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class IFF : NetworkBehaviour
     [SerializeField] int iffAllegiance;
     public static readonly int feralIFF = 0;
 
+    public Action<int> OnChangeIFF;
     private void Start()
     {
         am = FindObjectOfType<AllegianceManager>();
@@ -26,6 +28,7 @@ public class IFF : NetworkBehaviour
     {
         iffAllegiance = value;
         SetFlag(0,0);
+        OnChangeIFF?.Invoke(value);
     }
 
     public int GetIFFAllegiance()

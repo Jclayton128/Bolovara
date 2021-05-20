@@ -61,7 +61,7 @@ public class DamageDealer : MonoBehaviour
         if (!weaponImpactAnimationPrefab) { return; }
         if (collision.gameObject == attackSource) { return; }
         if (!collision.enabled) { return; }
-        Debug.Log($" {collision.gameObject} just hit {gameObject}");
+        //Debug.Log($" {collision.gameObject} just hit {gameObject}");
         CreateImpactAnimoid();
     }
 

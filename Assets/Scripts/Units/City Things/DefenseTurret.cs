@@ -9,10 +9,10 @@ public class DefenseTurret : NetworkBehaviour
     [SerializeField] GameObject weaponPrefab = null;
     [SerializeField] AudioClip[] firingSounds = null;
     UnitTracker ut;
-    List<GameObject> targets = new List<GameObject>();
+    [SerializeField] List<GameObject> targets = new List<GameObject>();
     IFF ownIFF;
     StealthHider sh;
-    StealthSeeker ss;
+    [SerializeField] StealthSeeker ss;
 
     //param
     public float timeBetweenShots; //.25f
@@ -39,8 +39,7 @@ public class DefenseTurret : NetworkBehaviour
         ss.OnSeekerDetection += EvaluateDetectedObject;
         ss.OnSeekerLostContact += HandleLostContact;
         ut.AddUnitToTargetableList(gameObject);
-
-
+        ownIFF.OnChangeIFF += CheckForAlliesAsTargetsAfterIFFChange;
     }
 
     public override void OnStartClient()
@@ -77,6 +76,26 @@ public class DefenseTurret : NetworkBehaviour
     {
         Debug.Log("lost contact on " + go.name);
         targets.Remove(go);
+    }
+
+    private void CheckForAlliesAsTargetsAfterIFFChange(int newIFF)
+    {
+        targets.RemoveAll(CheckForEnemy);
+        //ss.ResetDetector();   
+    }
+
+    private bool CheckForEnemy(GameObject go)
+    {
+        if (go.GetComponent<IFF>().GetIFFAllegiance() != ownIFF.GetIFFAllegiance())
+        {
+            Debug.Log("Found an enemy after reviewing target list");
+            return false;
+        }
+        else
+        {
+            Debug.Log("Found an ally after reviewing target list");
+            return true;
+        }
     }
 
     private void PrioritizeTargets()
@@ -151,7 +170,9 @@ public class DefenseTurret : NetworkBehaviour
         if (isServer)
         {
             ut.RemoveUnitFromTargetableList(gameObject);
+            ownIFF.OnChangeIFF -= CheckForAlliesAsTargetsAfterIFFChange;
         }
+
     }
 
 }

@@ -8782,6 +8782,9 @@ MonoBehaviour:
   - {fileID: 4736777088589369892, guid: dd50caacceff75449a8e5e0fbb3b6ec0, type: 3}
   - {fileID: 7548835469805105311, guid: ae80defb72c7afb4fb7d6635c0d82a85, type: 3}
   - {fileID: 1744198805709198696, guid: 62ed5d5898dad10478adba32a05b9613, type: 3}
+  - {fileID: 116949568587128204, guid: 1c20df8a24675484892202bc4c0eda61, type: 3}
+  - {fileID: 3649053544747291393, guid: a3197c2e03b6a524c982cd19d37f9abc, type: 3}
+  - {fileID: 3671661955942005225, guid: e5bf8a2a8ca32fe4085a8e0717b768c5, type: 3}
   am: {fileID: 1345437013}
 --- !u!1 &816937745
 GameObject:
@@ -43347,6 +43350,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1200691773861183226, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
+      propertyPath: iffAllegiance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4164942101872321102, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
       propertyPath: m_Name
       value: Tank (1)

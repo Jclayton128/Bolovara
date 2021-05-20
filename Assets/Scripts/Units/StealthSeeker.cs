@@ -37,6 +37,10 @@ public class StealthSeeker : MonoBehaviour
         GrowShrinkSeekerRange();
     }
 
+    public void ResetDetector()
+    {
+        collider.radius = 0.001f;
+    }
     private void GrowShrinkSeekerRange()
     {
         if (collider.radius < SeekerRange)
