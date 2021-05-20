@@ -52,7 +52,8 @@ public class PlayerInput : ControlSource
             int myIFF = playerAtThisComputer.GetComponent<FactionLeader>().GetMasterIFFAllegiance();
             iff.SetIFFAllegiance(myIFF);
             flagImage = uim.GetFlagUIElement(playerAtThisComputer);
-            flagImage.sprite = am.GetFlagOfAllegiance(myIFF);           
+            flagImage.sprite = am.GetFlagOfAllegiance(myIFF);
+            tm = playerAtThisComputer.GetComponent<TurretMaker>();
         }
     }
 
@@ -74,11 +75,7 @@ public class PlayerInput : ControlSource
         if (Input.GetKeyDown(KeyCode.Mouse0) )
         {
             LMBdown = true;
-            if (attack.GetBlockedByUIStatus() == false)
-            {
-                attack.CmdRequestAttackCommence();
-            }
-
+            tm.HandleClick();
 
         }
         if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -89,7 +86,7 @@ public class PlayerInput : ControlSource
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             RMBdown = true;
-            //attack.RMBDown();
+            attack.CmdRequestAttackCommence();
         }
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {

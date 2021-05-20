@@ -100,21 +100,16 @@ public class TurretMaker : NetworkBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         UpdateTurretSelectionBasedOnMouse();
-        ListenForMouseClick();
     }
 
-    private void ListenForMouseClick()
+    public void HandleClick()
     {
-        if (hasAuthority)
+
+        if (nearestHouse)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                if (nearestHouse)
-                {
-                    CmdRequestTurretUpgrade(currentSelectionIndex, nearestHouse.transform.position, myIFF, nearestHouse);
-                }
-            }
+            CmdRequestTurretUpgrade(currentSelectionIndex, nearestHouse.transform.position, myIFF, nearestHouse);
         }
+
     }
 
     private void UpdateTurretSelectionBasedOnMouse()
@@ -145,12 +140,16 @@ public class TurretMaker : NetworkBehaviour
         if (sacrificialHouse.GetComponent<IFF>().GetIFFAllegiance() != iff) { return; } // Server check that the house is allied
         mh.ModifyMoney(-1 * turretOptionCosts[currentSelectionIndex]);
 
+        GameObject newTurret = Instantiate(turretOptionPrefabs[index], position, Quaternion.identity) as GameObject;
+        newTurret.GetComponent<IFF>().SetIFFAllegiance(iff);
+
         ClearCurrentSelection();
         RpcUpgradeHouseIntoTurret(index, position, iff);
-        //nearestHouse.GetComponent<Building>().DyingActions();  //The server doesn't have a working allegiance manager, I guess? This line makes the server sad.
-        nearestHouse = null;
-        NetworkServer.Destroy(nearestHouse);
 
+        //nearestHouse.GetComponent<Building>().DyingActions();  //The server doesn't have a working allegiance manager, I guess? This line makes the server sad.
+        NetworkServer.Destroy(nearestHouse);
+        nearestHouse = null;
+        ClearCurrentSelection();
     }
 
     [ClientRpc]

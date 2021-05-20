@@ -17,8 +17,6 @@ public abstract class Attack : NetworkBehaviour
     public float projectileSpeed;
     public float projectileLifetime;
 
-    //hood
-    bool isBlockedByUIMode = false;
 
 
     protected virtual void Start()
@@ -36,16 +34,6 @@ public abstract class Attack : NetworkBehaviour
     }
 
     protected abstract void ExecuteAttackOnServer();
-
-    public void SetBlockedByUI(bool isBlocked)
-    {
-        isBlockedByUIMode = isBlocked;
-    }
-
-    public bool GetBlockedByUIStatus()
-    {
-        return isBlockedByUIMode;
-    }
 
 
 }
