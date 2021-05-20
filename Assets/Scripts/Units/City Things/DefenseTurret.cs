@@ -12,32 +12,35 @@ public class DefenseTurret : NetworkBehaviour
     List<GameObject> targets = new List<GameObject>();
     IFF ownIFF;
     StealthHider sh;
+    StealthSeeker ss;
 
     //param
     public float timeBetweenShots; //.25f
     public float weaponSpeed; //20
     public float weaponLifetime; //.45f
     public float weaponDamage;
-    public float searchRange = 10f;
     float bulletOffset = 0.1f;  //.4 does it
-    float timeBetweenScans = 0.2f;
 
     //hood
     float timeSinceLastShot = 0;
     float attackRange;
     AudioClip selectedFiringSound;
     public GameObject target;
-    float timeSinceLastScan = 0;
 
     // Start is called before the first frame update
     public override void OnStartServer()
     {
         base.OnStartServer();
         ut = FindObjectOfType<UnitTracker>();
-        ownIFF = GetComponentInChildren<IFF>();
+        ownIFF = GetComponent<IFF>();
         attackRange = weaponLifetime * weaponSpeed;
         sh = GetComponentInChildren<StealthHider>();
+        ss = GetComponentInChildren<StealthSeeker>();
+        ss.OnSeekerDetection += EvaluateDetectedObject;
+        ss.OnSeekerLostContact += HandleLostContact;
         ut.AddUnitToTargetableList(gameObject);
+
+
     }
 
     public override void OnStartClient()
@@ -51,20 +54,41 @@ public class DefenseTurret : NetworkBehaviour
     {
         if (isServer)
         {
-            ScanForTarget();
+            PrioritizeTargets();
             FireWeaponAtTarget();
         }
     }
 
-    private void ScanForTarget()
+    private void EvaluateDetectedObject(GameObject go)
     {
-        timeSinceLastScan -= Time.deltaTime;
-        if (timeSinceLastScan <= 0)
+        Debug.Log("Evaluating detected object " + go.name);
+        IFF goIFF;
+        if (go.TryGetComponent<IFF>(out goIFF) && go.GetComponent<ControlSource>() != null)
         {
-            target = ut.FindClosestTargetWithinSearchRange(gameObject, searchRange, ownIFF.GetIFFAllegiance());
-            timeSinceLastScan = timeBetweenScans;
+            int targetIFF = goIFF.GetIFFAllegiance();
+            if (targetIFF != ownIFF.GetIFFAllegiance())
+            {
+                targets.Add(go);
+            }
         }
- 
+    }
+
+    private void HandleLostContact(GameObject go)
+    {
+        Debug.Log("lost contact on " + go.name);
+        targets.Remove(go);
+    }
+
+    private void PrioritizeTargets()
+    {
+        if (targets.Count > 0)
+        {
+            target = targets[0]; // TODO: maybe have some prioritization in the turret's target if more than one target
+        }
+        else
+        {
+            target = null;
+        }
     }
 
     private void FireWeaponAtTarget()

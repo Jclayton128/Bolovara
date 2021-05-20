@@ -17,10 +17,16 @@ public class StealthSeeker : MonoBehaviour
     //hood
     public bool isAvatarOfLocalPlayer = false;
 
+    public Action<GameObject> OnSeekerDetection;
+    public Action<GameObject> OnSeekerLostContact;
+
     void Start()
     {
         cs = GetComponentInParent<ControlSource>();
-        isAvatarOfLocalPlayer = cs.CheckIfAvatarOfLocalPlayer();
+        if (cs)
+        {
+            isAvatarOfLocalPlayer = cs.CheckIfAvatarOfLocalPlayer();
+        }
         collider = GetComponent<CircleCollider2D>();
         collider.radius = 0.001f;
     }
@@ -51,18 +57,22 @@ public class StealthSeeker : MonoBehaviour
 
         //Debug.Log("detection");
 
+        OnSeekerDetection?.Invoke(collision.transform.root.gameObject);
+
         if (isAvatarOfLocalPlayer)
         {
             //Debug.Log($"detected {collision.transform.root.name} and trying to make it visible to player");
             collision.GetComponent<StealthHider>().MakeObjectFullyVisible();
+            
         }
-        cs.RequestScan();
+        //cs.RequestScan();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Debug.Log("back to hiding");
 
+        OnSeekerLostContact?.Invoke(collision.transform.root.gameObject);
         if (isAvatarOfLocalPlayer)
         {
             collision.GetComponent<StealthHider>().FadeOrTurnInvisible();

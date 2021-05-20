@@ -118,7 +118,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   housePrefab: {fileID: 7548835469805105311, guid: ae80defb72c7afb4fb7d6635c0d82a85, type: 3}
-  turretPrefab: {fileID: 1744198805709198696, guid: 62ed5d5898dad10478adba32a05b9613, type: 3}
+  turretPrefab: {fileID: 116949568587128204, guid: 1c20df8a24675484892202bc4c0eda61, type: 3}
   baseTimeBetweenHouseCreations: 10
 --- !u!58 &1904964130634715354
 CircleCollider2D:

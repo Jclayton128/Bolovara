@@ -53,7 +53,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1744198805709198696, guid: 62ed5d5898dad10478adba32a05b9613, type: 3}
       propertyPath: m_Name
-      value: CannonTurret
+      value: CannonTurretVar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408087795450367891, guid: 62ed5d5898dad10478adba32a05b9613, type: 3}
+      propertyPath: weaponLifetime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2982194790861819107, guid: 62ed5d5898dad10478adba32a05b9613, type: 3}
       propertyPath: m_AssetId
