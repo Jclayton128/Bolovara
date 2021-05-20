@@ -751,6 +751,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CitySquare (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3016664674593428982, guid: 98f4bc4552c1792499629f2412800786, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98f4bc4552c1792499629f2412800786, type: 3}
 --- !u!1 &46195449
@@ -1340,6 +1344,10 @@ PrefabInstance:
     - target: {fileID: 3016664674593428982, guid: 98f4bc4552c1792499629f2412800786, type: 3}
       propertyPath: m_Name
       value: CitySquare (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016664674593428982, guid: 98f4bc4552c1792499629f2412800786, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98f4bc4552c1792499629f2412800786, type: 3}
@@ -4190,6 +4198,10 @@ PrefabInstance:
     - target: {fileID: 3016664674593428982, guid: 98f4bc4552c1792499629f2412800786, type: 3}
       propertyPath: m_Name
       value: CitySquare (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016664674593428982, guid: 98f4bc4552c1792499629f2412800786, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98f4bc4552c1792499629f2412800786, type: 3}
@@ -7818,6 +7830,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CitySquare (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3016664674593428982, guid: 98f4bc4552c1792499629f2412800786, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98f4bc4552c1792499629f2412800786, type: 3}
 --- !u!1 &745213703
@@ -9860,6 +9876,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CitySquare (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 3016664674593428982, guid: 98f4bc4552c1792499629f2412800786, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98f4bc4552c1792499629f2412800786, type: 3}
 --- !u!1 &891179314
@@ -11659,6 +11679,15 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: 18, y: 13, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 40
@@ -11671,7 +11700,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 5c6c284284a416f4c8d9cc30c9608522, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: fe803938442d8b24ea3cf9b5b73c2d42, type: 2}
-  - m_RefCount: 10
+  - m_RefCount: 11
     m_Data: {fileID: 11400000, guid: b5798e4a6eeb100459b0112ab1f69c7c, type: 2}
   - m_RefCount: 11
     m_Data: {fileID: 11400000, guid: 2566d2080c5dc7640b20d464394686ad, type: 2}
@@ -11730,7 +11759,7 @@ Tilemap:
     m_Data: {fileID: -7263291563061316075, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 7702296157302466187, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
-  - m_RefCount: 10
+  - m_RefCount: 11
     m_Data: {fileID: -3469040813582345658, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
   - m_RefCount: 11
     m_Data: {fileID: -9213715496947173890, guid: cf49d22dcd6f91242a2e2c94874bd5f6, type: 3}
@@ -11779,7 +11808,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 5620746567160627507, guid: 46a760aa8c74f7e468f0d8b60c2fcc40, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 180
+  - m_RefCount: 181
     m_Data:
       e00: 1
       e01: 0
@@ -11798,7 +11827,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 180
+  - m_RefCount: 181
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -42341,6 +42370,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CitySquare (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3016664674593428982, guid: 98f4bc4552c1792499629f2412800786, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98f4bc4552c1792499629f2412800786, type: 3}
 --- !u!1 &1509268110
@@ -43317,6 +43350,10 @@ PrefabInstance:
     - target: {fileID: 4164942101872321102, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
       propertyPath: m_Name
       value: Tank (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4164942101872321102, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4164942101872321105, guid: 27cc6a5c69fb5274a83e024579494e46, type: 3}
       propertyPath: sceneId
