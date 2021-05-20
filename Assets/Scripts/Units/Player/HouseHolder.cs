@@ -13,7 +13,7 @@ public class HouseHolder : NetworkBehaviour
     //param
 
     [SyncVar(hook = nameof(UpdateUI))]
-    int numberOfHouses = 0;
+    [SerializeField] int numberOfHouses = 0;
 
     // Start is called before the first frame update
     void Start()

@@ -15,7 +15,7 @@ public class MoneyHolder : NetworkBehaviour
 
     //hood
     [SyncVar(hook = nameof(UpdateUI))]
-    int money = 0;
+    int money = 5;
     void Start()
     {
         if (isClient && hasAuthority)

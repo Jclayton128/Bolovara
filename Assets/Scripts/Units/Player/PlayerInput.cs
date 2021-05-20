@@ -107,6 +107,7 @@ public class PlayerInput : ControlSource
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             tpd.TogglePanelState();
+            tm.ClearCurrentSelection();
         }
     }
     private void HandleGearShifting()

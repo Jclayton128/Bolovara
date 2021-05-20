@@ -146,8 +146,11 @@ public class TurretMaker : NetworkBehaviour
         ClearCurrentSelection();
         RpcUpgradeHouseIntoTurret(index, position, iff);
 
+        sacrificialHouse.GetComponent<Building>().FindCurrentOwner();
+        sacrificialHouse.GetComponent<Building>().owner.GetComponent<HouseHolder>().DecrementHouseCount();
+
         //nearestHouse.GetComponent<Building>().DyingActions();  //The server doesn't have a working allegiance manager, I guess? This line makes the server sad.
-        NetworkServer.Destroy(nearestHouse);
+        NetworkServer.Destroy(sacrificialHouse);
         nearestHouse = null;
         ClearCurrentSelection();
     }

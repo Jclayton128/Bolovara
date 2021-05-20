@@ -37,6 +37,7 @@ public class DefenseTurret : NetworkBehaviour
         ownIFF = GetComponentInChildren<IFF>();
         attackRange = weaponLifetime * weaponSpeed;
         sh = GetComponentInChildren<StealthHider>();
+        ut.AddUnitToTargetableList(gameObject);
     }
 
     public override void OnStartClient()
@@ -121,6 +122,13 @@ public class DefenseTurret : NetworkBehaviour
         return audioArray[random];
     }
 
+    private void OnDestroy()
+    {
+        if (isServer)
+        {
+            ut.RemoveUnitFromTargetableList(gameObject);
+        }
+    }
 
 }
 

@@ -7,7 +7,6 @@ using UnityEngine;
 public class Building : NetworkBehaviour
 {
     //init
-    UnitTracker ut;
     public AllegianceManager am;
     SpriteRenderer sr;
     [SerializeField] Sprite[] possibleHouseSprites = null;
@@ -37,8 +36,7 @@ public class Building : NetworkBehaviour
             ChooseHouseImage();
         }
        
-        ut = FindObjectOfType<UnitTracker>();
-        ut.AddUnitToTargetableList(gameObject);
+
         //UpdateCurrentOwner();
         timeSinceLastMoneyDrop = UnityEngine.Random.Range(0, timeBetweenMoneyDrops);
     }
@@ -100,25 +98,18 @@ public class Building : NetworkBehaviour
             owner.GetComponent<HouseHolder>().IncrementHouseCount();
         }
     }
+
     public void DyingActions()
     {
+        if (isServer == false) { return; }
         if (!cs) { return; }
+
         if (!GetComponent<DefenseTurret>())
         {
             FindCurrentOwner();
             owner.GetComponent<HouseHolder>().DecrementHouseCount();
         }
         cs.RemoveBuildingFromList(this);
-        ut.RemoveUnitFromTargetableList(gameObject);
     }
 
-    public void DestroyDueToTurretUpgrade()
-    {
-        FindCurrentOwner();
-        owner.GetComponent<HouseHolder>().DecrementHouseCount();
-        cs.RemoveBuildingFromList(this);
-        ut.RemoveUnitFromTargetableList(gameObject);
-        Destroy(gameObject);
-    }
-
-}
+  }
