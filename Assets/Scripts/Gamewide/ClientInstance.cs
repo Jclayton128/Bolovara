@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using System;
 using Cinemachine;
+using UnityEngine.AI;
 
 public class ClientInstance : NetworkBehaviour
 {
@@ -11,6 +12,7 @@ public class ClientInstance : NetworkBehaviour
     public static ClientInstance Instance;
     Camera cam;
     public GameObject currentAvatar;
+    NavMeshSurface2d navMesh;
 
     public static Action<GameObject> OnAvatarSpawned; //Anytime an observer to this event hears it, they get passed a reference Game Object
 
@@ -61,11 +63,13 @@ public class ClientInstance : NetworkBehaviour
     [Server]
     private void NetworkSpawnAvatar()
     {
-        GameObject go = Instantiate(tankPrefab, transform.position, Quaternion.identity);
+        Vector3 randomPos = MapHelper.CreateRandomValidStartPoint();
+        GameObject go = Instantiate(tankPrefab, randomPos, Quaternion.identity);
         int masterIFF = GetComponent<FactionLeader>().GetMasterIFFAllegiance();
         go.GetComponent<IFF>().SetIFFAllegiance(masterIFF);
         NetworkServer.Spawn(go, base.connectionToClient);
     }
+
 
     #endregion
 

@@ -17,6 +17,7 @@ public class PlayerInput : ControlSource
     IFF iff;
     TurretPanelDriver tpd;
     TurretMaker tm;
+    CaptureTool ct;
 
     //param
 
@@ -54,6 +55,7 @@ public class PlayerInput : ControlSource
             flagImage = uim.GetFlagUIElement(playerAtThisComputer);
             flagImage.sprite = am.GetFlagOfAllegiance(myIFF);
             tm = playerAtThisComputer.GetComponent<TurretMaker>();
+            ct = GetComponentInChildren<CaptureTool>();
         }
     }
 

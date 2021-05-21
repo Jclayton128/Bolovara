@@ -80,8 +80,9 @@ public class DefenseTurret : NetworkBehaviour
 
     private void CheckForAlliesAsTargetsAfterIFFChange(int newIFF)
     {
+        Debug.Log("check is firing!");
         targets.RemoveAll(CheckForEnemy);
-        //ss.ResetDetector();   
+        ss.ResetDetector();   
     }
 
     private bool CheckForEnemy(GameObject go)
