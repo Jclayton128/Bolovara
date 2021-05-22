@@ -17,7 +17,6 @@ public class TurretMaker : NetworkBehaviour
     [SerializeField] int[] turretOptionCosts = null;
     int myIFF;
     MoneyHolder mh;
-    CaptureTool avatarCT;
 
     //param
     float snapRange = 1.0f;
@@ -108,6 +107,11 @@ public class TurretMaker : NetworkBehaviour
         if (nearestHouse)
         {
             CmdRequestTurretUpgrade(currentSelectionIndex, nearestHouse.transform.position, myIFF, nearestHouse);
+            if (mh.CheckForSufficientFunds(turretOptionCosts[currentSelectionIndex]))
+            {
+                ClearCurrentSelection();
+            }
+
         }
 
     }
@@ -147,7 +151,6 @@ public class TurretMaker : NetworkBehaviour
         newTurretBuilding.SetOwningCity(newCS);
         newCS.AddTurretToList(newTurretBuilding);
 
-        ClearCurrentSelection();
         NetworkServer.Spawn(newTurret);
         //RpcUpgradeHouseIntoTurret(index, position, iff);
 
@@ -156,14 +159,6 @@ public class TurretMaker : NetworkBehaviour
         nearestHouse = null;
         ClearCurrentSelection();
     }
-
-    [ClientRpc]
-    public void RpcUpgradeHouseIntoTurret(int turretType, Vector3 pos, int newIFF)
-    {
-        GameObject newTurret = Instantiate(turretOptionPrefabs[turretType], pos, Quaternion.identity) as GameObject;
-        newTurret.GetComponent<IFF>().SetIFFAllegiance(newIFF);
-    }
-
 
     private GameObject CheckForNearbyAlliedHouse(Vector3 mousePos)
     {
